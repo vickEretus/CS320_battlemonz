@@ -44,12 +44,14 @@ public class GameTest {
 
 	@Test
 	public void testSetTurn() {
-		assertEquals(2, game_two.setTurn(2));
+		game_two.setTurn(2);
+		assertEquals(2, game_two.getTurn());
 	}
 	
 	@Test
 	public void testSetRound() {
-		assertEquals(3, game_one.setRound(3));
+		game_one.setRound(3);
+		assertEquals(3, game_one.getRound());
 	}
 	
 	

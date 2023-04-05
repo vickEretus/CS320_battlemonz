@@ -48,6 +48,7 @@ public class GameServlet extends HttpServlet {
 		
 				Game model = new Game();
 				GameController controller = new GameController();
+				
 		
 			
 				

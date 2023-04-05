@@ -50,21 +50,15 @@ public class Deck {
 		
 	}
 	
-	public void deleteCard() { // deletes card from collection
+	public void deleteLastCard() { // deletes card from collection
 		cards.remove(cards.size() - 1);
 	}
 	
-	
-	
-	
-	/*public void saveCards() { // saves cards to collection
-		
+	public void deleteCard(int index) { // deletes specified card
+		cards.remove(index);
 	}
 	
-	
-	public void confirm() { // user confirms collection
-		
-	}*/
+
 
 	public void setToOriginal() {
 		for (int i = 0; i < cards.size(); i++) {

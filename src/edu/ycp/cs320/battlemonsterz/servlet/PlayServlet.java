@@ -29,6 +29,11 @@ public class PlayServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		System.out.println("Play Servlet: doPost");
+		
+		if (req.getParameter("back") != null) {
+            // call index JSP
+            req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+        }
 	
 		
 
@@ -67,7 +72,14 @@ public class PlayServlet extends HttpServlet {
 		req.setAttribute("result", result);
 		
 		// Forward to view to render the result HTML document
-		req.getRequestDispatcher("/_view/play.jsp").forward(req, resp);
+        if (req.getParameter("game") != null) {
+            // call addNumbers JSP
+            req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
+        }
+        
+        else {
+        
+		req.getRequestDispatcher("/_view/play.jsp").forward(req, resp);}
 	}
 
 	// gets double from the request with attribute named s
