@@ -41,8 +41,7 @@ public class IndexServlet extends HttpServlet {
 	            // call addNumbers JSP
 	            req.getRequestDispatcher("/_view/carddatabase.jsp").forward(req, resp);
 	        }
-	        
-	      
+
 	        
 	        else {
 	        	throw new ServletException("Unknown command");

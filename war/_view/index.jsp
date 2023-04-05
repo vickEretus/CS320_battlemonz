@@ -47,6 +47,7 @@
 		<h1>Navigation</h1>
 			</div>
 			<div>
+			<input name = "login" type = "submit" value = "Back">
 			<input name = "account" type = "submit" value = "Account">
 			<input name = "carddatabase" type = "submit" value = "Card Database">
 			<input name = "play" type = "submit" value = "Play"> 
