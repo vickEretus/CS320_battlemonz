@@ -6,14 +6,52 @@
 	<head>
 		<title>Account</title>
 		<style type="text/css">
-		.error {
-			color: red;
+		body{
+		background-color:black;
+		color:orangeRed;}
+		
+		#title{
+		width:100%;
+		text-align:center;
+		height:50px;
 		}
 		
-		td.label {
-			text-align: right;
+		#info{
+
+		
+			margin-left:350px;
+			margin-right:200px;
+			width:50%;
+			height:400px;
+			border-radius:50px;
+			background-color:orangeRed;
+			color:black;
+			line-height:75px;
+			text-align:center;
 		}
+		
+		#buttons input{
+	
+		
+		background-color:OrangeRed;
+		width: 100px;
+		height:30px;
+		border-radius:20px;
+		margin: 0 auto;
+    display: block;
+		
+		}
+		
+		#buttons{
+		display:flex;
+		margin-top:30px;
+		justify-content:space-between;
+		}
+		
+		
 		</style>
+		
+		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
 	<body>
@@ -22,11 +60,40 @@
 		</c:if>
 	
 		<form action="${pageContext.servletContext.contextPath}/account" method="post">
-			<table>
-				
-				
-			</table>
-			<input type="Submit" name="submit" value="Account">
+			<div id = "title">
+			<h1>Account Information</h1>
+			</div>
+			
+			<div id = "info">
+			<h1>
+			Username
+			</h1>
+
+			<h1>
+			Password 
+			</h1>
+			
+			<h1>
+			Wins
+			</h1>
+			
+			<h1>
+			Losses 
+			</h1>
+			
+			
+			</div>
+			
+			<br><br>
+			
+			<div id="buttons">
+			<input name = "back" type = "submit" value = "Go back">
+			
+
+			
+			<input type="Submit" name="logout" value="Logout">
+			
+			</div>
 		</form>
 	</body>
 </html>

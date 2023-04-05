@@ -29,6 +29,16 @@ public class AccountServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		System.out.println("Account Servlet: doPost");
+		 // check which button the user pressed
+        if (req.getParameter("back") != null) {
+            // call index JSP
+            req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+        }
+        
+        if (req.getParameter("logout") != null) {
+            // call index JSP
+            req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+        }
 	
 		
 

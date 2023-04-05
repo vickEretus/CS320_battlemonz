@@ -5,11 +5,11 @@ package edu.ycp.cs320.battlemonsterz.model;
 
 public class Card {
 	// fields
-	private static double max_health = 100.0;
+	private static double max_health;
 	private double health, attack_rating, defense_rating;
 	private Type type;
 	private String name;
-	
+	private String url;
 	
 	// constructors
 	public Card(double health, double attack_rating, double defense_rating, Type type, String name) {
@@ -18,6 +18,8 @@ public class Card {
 		this.defense_rating = defense_rating;
 		this.type = type;
 		this.name = name;
+		max_health = health;
+		url ="<%=request.getContextPath()%>/Images/" + name + ".jpeg";
 	}
 	
 	public Card() {	 // default card
@@ -26,7 +28,10 @@ public class Card {
 		defense_rating = 0.0;
 		type = null;
 		name = null;
+		max_health = health;
+		url ="";
 	}
+	
 	// getters
 	
 	public double getHealth() {
@@ -51,7 +56,12 @@ public class Card {
 		return name;
 	}
 	
+	public String getURL() {
+		return url;
+	}
+	
 	// setters
+	
 	public void setHealth(double health) {
 		this.health = health;
 	}
@@ -75,6 +85,14 @@ public class Card {
 	
 	public void setToOriginal() {
 		health = max_health;
+	}
+	
+	public void setURL(String url) {
+		this.url = url;
+	}
+	
+	public void createURL(String cardname) {
+		url = "<%=request.getContextPath()%>/Images/" + cardname + ".jpeg";
 	}
 	
 	// to string

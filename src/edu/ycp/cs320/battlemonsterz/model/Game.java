@@ -122,6 +122,10 @@ public class Game {
 		this.round = round;
 	}
 	
+	public void nextRound() {
+		round++;
+	}
+	
 	public String toString() {
 		return ("Game Status: " + status + "Team 1 Health: " + deck_one.getTeamHealth() + 
 				"Team 2 Health: " + deck_two.getTeamHealth());

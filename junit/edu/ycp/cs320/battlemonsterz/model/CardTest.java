@@ -65,41 +65,56 @@ public class CardTest {
 	// test setters
 	@Test
 	public void testSetHealth() throws Exception {
-		assertEquals(75.0, card_one.setHealth(75.0));
-		assertEquals(64.0, card_two.setHealth(64.0));
-		assertEquals(0.0, card_three.setHealth(0.0));
+		card_one.setHealth(75.0);
+		card_two.setHealth(64.0);
+		card_three.setHealth(0.0);
+		assertEquals(75.0, card_one.getHealth());
+		assertEquals(64.0, card_two.getHealth());
+		assertEquals(0.0, card_three.getHealth());
 		
 	}
 	
 	@Test
 	public void testSetAttackRating() throws Exception {
-		assertEquals(88.0, card_one.setAttackRating(88.0));
-		assertEquals(43.0, card_two.setAttackRating(43.0));
-		assertEquals(6.0, card_three.setAttackRating(6.0));
+		card_one.setAttackRating(88.0);
+		card_two.setAttackRating(43.0);
+		card_three.setAttackRating(6.0);
+		assertEquals(88.0, card_one.getAttackRating());
+		assertEquals(43.0, card_two.getAttackRating());
+		assertEquals(6.0, card_three.getAttackRating());
 		
 	}
 	
 	@Test
 	public void testSetDefenseRating() throws Exception {
-		assertEquals(33.0, card_one.setDefenseRating(33.0));
-		assertEquals(3.0, card_two.setDefenseRating(3.0));
-		assertEquals(16.0, card_three.setDefenseRating(16.0));
+		card_one.setDefenseRating(33.0);
+		card_two.setDefenseRating(3.0);
+		card_three.setDefenseRating(16.0);
+		assertEquals(33.0, card_one.getDefenseRating());
+		assertEquals(3.0, card_two.getDefenseRating());
+		assertEquals(16.0, card_three.getDefenseRating());
 		
 	}
 	
 	@Test
 	public void testSetType() throws Exception {
-		assertEquals(Type.GRASS, card_one.setType(Type.GRASS));
-		assertEquals(Type.FIRE, card_two.setType(Type.FIRE));
-		assertEquals(Type.WATER, card_three.setType(Type.WATER));
+		card_one.setType(Type.GRASS);
+		card_two.setType(Type.FIRE);
+		card_three.setType(Type.WATER);
+		assertEquals(Type.GRASS, card_one.getType());
+		assertEquals(Type.FIRE, card_two.getType());
+		assertEquals(Type.WATER, card_three.getType());
 		
 	}
 	
 	@Test
 	public void testSetName() throws Exception {
-		assertEquals("Cupid", card_one.setName("Cupid"));
-		assertEquals("Skywalker", card_two.setName("Skywalker"));
-		assertEquals(null, card_three.setName(null)));
+		card_one.setName("Cupid");
+		card_two.setName("Skywalker");
+		card_three.setName(null);
+		assertEquals("Cupid", card_one.getName());
+		assertEquals("Skywalker", card_two.getName());
+		assertEquals(null, card_three.getName());
 		
 	}
 	
