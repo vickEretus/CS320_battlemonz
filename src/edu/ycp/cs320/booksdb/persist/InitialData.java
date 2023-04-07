@@ -71,9 +71,10 @@ public class InitialData {
 				
 				card.setCardId(cardId++);
 				card.setAttackId(Integer.parseInt(i.next()));
-				card.setDefense(Integer.parseInt(i.next()));
-				card.setHP(Integer.parseInt(i.next()));
 				card.setName(i.next());
+				card.setType(i.next());
+				card.setHP(Integer.parseInt(i.next()));
+				card.setDefense(Integer.parseInt(i.next()));
 				cardList.add(card);
 				
 				
@@ -114,8 +115,8 @@ public class InitialData {
 				Integer.parseInt(i.next());
 				// auto-generate book ID, instead
 				account.setAccountId(accountId++);
-				account.setPassword(i.next());
 				account.setUsername(i.next());
+				account.setPassword(i.next());
 				
 				accountList.add(account);
 				

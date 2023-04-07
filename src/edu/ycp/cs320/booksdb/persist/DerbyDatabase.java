@@ -81,7 +81,7 @@ public class DerbyDatabase implements IDatabase {
 	// TODO: Change it here and in SQLDemo.java under CS320_LibraryExample_Lab06->edu.ycp.cs320.sqldemo
 	// TODO: DO NOT PUT THE DB IN THE SAME FOLDER AS YOUR PROJECT - that will cause conflicts later w/Git
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320-2019-LibraryExample-DB/library.db;create=true");		
+		Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320-Battlemonz-DB/library.db;create=true");		
 		
 		// Set autocommit() to false to allow the execution of
 		// multiple queries/statements as part of the same transaction.
@@ -172,45 +172,50 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					stmt1 = conn.prepareStatement(
-						"create table authors (" +
-						"	author_id integer primary key " +
+						"create table attacks (" +
+						"	attack_Id integer primary key " +
 						"		generated always as identity (start with 1, increment by 1), " +									
-						"	lastname varchar(40)," +
-						"	firstname varchar(40)" +
+						"	type varchar(40)," +
+						"	power varchar(40)" +
 						")"
 					);	
 					stmt1.executeUpdate();
 					
-					System.out.println("Authors table created");
+					System.out.println("Attacks table created");
 					
 					stmt2 = conn.prepareStatement(
-							"create table books (" +
-							"	book_id integer primary key " +
+							"create table cards (" +
+							"	card_Id integer primary key " +
 							"		generated always as identity (start with 1, increment by 1), " +
-//							"	author_id integer constraint author_id references authors, " +  	// this is now in the BookAuthors table
-							"	title varchar(70)," +
-							"	isbn varchar(15)," +
-							"   published integer" +
+							"	attack_Id integer constraint attack_Id references attacks, " +  	// this is now in the BookAuthors table
+							"	name varchar(70)," +
+							"	type varchar(15)," +
+							"   hp integer, " +
+							"   defense integer" +
 							")"
 					);
 					stmt2.executeUpdate();
 					
-					System.out.println("Books table created");					
+					System.out.println("Cards table created");					
 					
 					stmt3 = conn.prepareStatement(
-							"create table bookAuthors (" +
-							"	book_id   integer constraint book_id references books, " +
-							"	author_id integer constraint author_id references authors " +
+							"create table accounts (" +
+							"	account_Id  integer primary key " + 
+							"		generated always as identity (start with 1, increment by 1), " +
+							"	username varchar(70)," +
+							"	password varchar(70)" +
 							")"
 					);
 					stmt3.executeUpdate();
 					
-					System.out.println("BookAuthors table created");					
+					System.out.println("Accounts table created");					
 										
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
+					DBUtil.closeQuietly(stmt3);
+
 				}
 			}
 		});
@@ -250,7 +255,7 @@ public class DerbyDatabase implements IDatabase {
 					System.out.println("Attacks table populated");
 					
 					// must completely populate Books table before populating BookAuthors table because of primary keys
-					insertCard = conn.prepareStatement("insert into cards (attackId, name, type, hp, defense ) values (?, ?, ?, ?, ?)");
+					insertCard = conn.prepareStatement("insert into cards (attack_Id, name, type, hp, defense ) values (?, ?, ?, ?, ?)");
 					for (Card card : cardList) {
 //						insertBook.setInt(1, book.getBookId());		// auto-generated primary key, don't insert this
 						insertCard.setInt(1, card.getAttackId());	// this is now in the BookAuthors table
