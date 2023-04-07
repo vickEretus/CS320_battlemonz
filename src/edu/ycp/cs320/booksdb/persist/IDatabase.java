@@ -10,6 +10,5 @@ public interface IDatabase {
 	public List<Pair<Attack, Card>> findCardByCardId(int cardId);
 	public List<Pair<Attack, Card>> findAccountByUsernameAndPassword( String username, String password  );
 	public Integer insertNewAccountByUsernameAndPassword(String username, String password);
-	public List<Pair<Attack, Card>> findAllCardsWithAttacks();
-	public List<Attack> findAllCards();
+	public List<Card> findAllCards();
 }
