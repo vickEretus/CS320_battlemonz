@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import edu.ycp.cs320.booksdb.model.Account;
 import edu.ycp.cs320.booksdb.model.Attack;
 import edu.ycp.cs320.booksdb.model.Card;
-import edu.ycp.cs320.booksdb.model.BookAuthor;
 
 public class InitialData {
 
 	// reads initial Author data from CSV file and returns a List of Authors
 	public static List<Attack> getAttacks() throws IOException {
 		List<Attack> attackList = new ArrayList<Attack>();
-		ReadCSV readAuthors = new ReadCSV("authors.csv"); //                            Change this to card.csv
+		ReadCSV readAttacks = new ReadCSV("attacks.csv"); //                            Change this to card.csv
 		try {
 			// auto-generated primary key for authors table
 			Integer attackId = 1;
 			while (true) {
-				List<String> tuple = readAuthors.next();
+				List<String> tuple = readAttacks.next();
 				if (tuple == null) {
 					break;
 				}
@@ -41,17 +41,17 @@ public class InitialData {
 //				author.setFirstname(i.next());
 //				authorList.add(author);
 			}
-			System.out.println("authorList loaded from CSV file");
+			System.out.println("attacksList loaded from CSV file");
 			return attackList;
 		} finally {
-			readAuthors.close();
+			readAttacks.close();
 		}
 	}
 	
 	// reads initial Book data from CSV file and returns a List of Books
 	public static List<Card> getCards() throws IOException {
 		List<Card> cardList = new ArrayList<Card>();
-		ReadCSV readCards = new ReadCSV("books.csv"); //changes to cards.csv
+		ReadCSV readCards = new ReadCSV("cards.csv"); //changes to cards.csv
 		try {
 			// auto-generated primary key for table books
 			Integer cardId = 1;
@@ -86,33 +86,49 @@ public class InitialData {
 //				
 //				bookList.add(book);
 			}
-			System.out.println("bookList loaded from CSV file");			
+			System.out.println("cardsList loaded from CSV file");			
 			return cardList;
 		} finally {
 			readCards.close();
 		}
 	}
 	
-	// reads initial BookAuthor data from CSV file and returns a List of BookAuthors
-	public static List<BookAuthor> getBookAuthors() throws IOException {
-		List<BookAuthor> bookAuthorList = new ArrayList<BookAuthor>();
-		ReadCSV readBookAuthors = new ReadCSV("book_authors.csv");
+	// reads initial Book data from CSV file and returns a List of Books
+	public static List<Account> getAccounts() throws IOException {
+		List<Account> accountList = new ArrayList<Account>();
+		ReadCSV readAccounts = new ReadCSV("accounts.csv"); //changes to cards.csv
 		try {
+			// auto-generated primary key for table books
+			Integer accountId = 1;
 			while (true) {
-				List<String> tuple = readBookAuthors.next();
+				List<String> tuple = readAccounts.next();
 				if (tuple == null) {
 					break;
 				}
 				Iterator<String> i = tuple.iterator();
-				BookAuthor bookAuthor = new BookAuthor();
-				bookAuthor.setBookId(Integer.parseInt(i.next()));				
-				bookAuthor.setAuthorId(Integer.parseInt(i.next()));
-				bookAuthorList.add(bookAuthor);
+				Account account = new Account();
+				
+				// read book ID from CSV file, but don't use it
+				// it's there for reference purposes, just make sure that it is correct
+				// when setting up the BookAuthors CSV file
+				Integer.parseInt(i.next());
+				// auto-generate book ID, instead
+				account.setAccountId(accountId++);
+				account.setPassword(i.next());
+				account.setUsername(i.next());
+				
+				accountList.add(account);
+				
+				
+				
+//				
 			}
-			System.out.println("bookAuthorList loaded from CSV file");			
-			return bookAuthorList;
+			System.out.println("accountsList loaded from CSV file");			
+			return accountList;
 		} finally {
-			readBookAuthors.close();
+			readAccounts.close();
 		}
 	}
+	
+
 }
