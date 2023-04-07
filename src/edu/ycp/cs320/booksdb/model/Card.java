@@ -7,6 +7,7 @@ public class Card {
 	private String type;
 	private int hp;
 	private int defense;
+	private int attack;
 	
 	public Card() {
 		
@@ -58,5 +59,12 @@ public class Card {
 	
 	public int getDefense() {
 		return defense;
+	}
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+	
+	public int getAttack() {
+		return attack;
 	}
 }
