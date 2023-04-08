@@ -70,11 +70,12 @@ public class InitialData {
 				// auto-generate book ID, instead
 				
 				card.setCardId(cardId++);
-				card.setAttackId(Integer.parseInt(i.next()));
+				//card.setAttackId(Integer.parseInt(i.next())); no longer in use 
 				card.setName(i.next());
 				card.setType(i.next());
 				card.setHP(Integer.parseInt(i.next()));
 				card.setDefense(Integer.parseInt(i.next()));
+				card.setAttack(Integer.parseInt(i.next()));
 				cardList.add(card);
 				
 				

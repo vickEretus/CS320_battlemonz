@@ -105,14 +105,14 @@ public class DerbyDatabase implements IDatabase {
 
 
 	@Override
-	public List<Pair<Attack, Card>> findCardByCardId(int cardId) {
+	public Card findCardByCardId(int cardId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public List<Pair<Attack, Card>> findAccountByUsernameAndPassword(String username, String password) {
+	public Integer findAccountByUsernameAndPassword(String username, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
