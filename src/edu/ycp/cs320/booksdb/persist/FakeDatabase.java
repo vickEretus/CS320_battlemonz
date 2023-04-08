@@ -41,21 +41,37 @@ public class FakeDatabase implements IDatabase {
 	
 
 	@Override
-	public List<Pair<Attack, Card>> findCardByCardId(int cardId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Card findCardByCardId(int cardId) {
+		Card theCard  = new Card();
+		for(Card cards: cardList ) {
+			if(cards.getCardId() == cardId ) {
+				theCard = cards;
+			}
+		}
+		return theCard;
 	}
 
 	@Override
-	public List<Pair<Attack, Card>> findAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer findAccountByUsernameAndPassword(String username, String password) {
+		Integer ID = -1;
+		for(Account account: accountList ) {
+			if(account.getUsername() == username && account.getPassword() == password ) {
+				ID = account.getAccountId();
+			}
+		}
+		return ID;
 	}
+	
 
 	@Override
 	public Integer insertNewAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer ID = -1;
+		for(Account account: accountList ) {
+			if(account.getUsername() == username && account.getPassword() == password ) {
+				ID = account.getAccountId();
+			}
+		}
+		return ID;
 	}
 
 	@Override

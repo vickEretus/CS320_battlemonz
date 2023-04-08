@@ -25,7 +25,7 @@ public class AllCardsQuery {
 		else {
 			for (Card cards : cardList) {
 				
-				System.out.println(cards.getCardId() + " | " + cards.getAttackId() + " | " + cards.getName() + " | " + cards.getType() + " | " + cards.getHP() + " | " + cards.getDefense());
+				System.out.println(cards.getCardId() + " | " + cards.getName() + " | " + cards.getType() + " | " + cards.getHP() + " | " + cards.getDefense());
 			}
 		}
 	}
