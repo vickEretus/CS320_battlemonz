@@ -35,7 +35,6 @@ public class UserController {
 		model.setUsername(username);
 		model.setPassword(password);
 
-	
 	}
 	
 	public String createUsername(String username) {
