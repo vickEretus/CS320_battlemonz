@@ -5,7 +5,7 @@ package edu.ycp.cs320.battlemonsterz.model;
 
 public class Card {
 	// fields
-	private static double max_health;
+	private double max_health;
 	private double health, attack_rating, defense_rating;
 	private Type type;
 	private String name;
@@ -22,15 +22,21 @@ public class Card {
 		url ="<%=request.getContextPath()%>/Images/" + name + ".jpeg";
 	}
 	
-	public Card() {	 // default card
-		health = 100.0;
-		attack_rating = 0.0;
-		defense_rating = 0.0;
-		type = null;
-		name = null;
-		max_health = health;
-		url ="";
+	public Card(int health, int attack_rating, int defense_rating, Type type, String name) {
+		this.health = (double)health;
+		this.attack_rating = (double)attack_rating;
+		this.defense_rating = (double)defense_rating;
+		this.type = type;
+		this.name = name;
+		max_health = (double)health;
+		url ="<%=request.getContextPath()%>/Images/" + name + ".jpeg";
 	}
+	
+	public Card() {
+		max_health = 0;
+		health = 0;
+	}
+
 	
 	// getters
 	
@@ -81,6 +87,7 @@ public class Card {
 	
 	public void setName(String name) {
 		this.name = name;
+		url ="<%=request.getContextPath()%>/Images/" + name + ".jpeg";
 	}
 	
 	public void setToOriginal() {
@@ -91,9 +98,6 @@ public class Card {
 		this.url = url;
 	}
 	
-	public void createURL(String cardname) {
-		url = "<%=request.getContextPath()%>/Images/" + cardname + ".jpeg";
-	}
 	
 	// to string
 	public String toString() {
