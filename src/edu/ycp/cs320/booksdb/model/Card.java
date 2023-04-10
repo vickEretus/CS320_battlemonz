@@ -2,11 +2,12 @@ package edu.ycp.cs320.booksdb.model;
 
 public class Card {
 	private int cardId;
-	private int attackId;
+	//private int attackId;
 	private String name;
 	private String type;
 	private int hp;
 	private int defense;
+	private int attack;
 	
 	public Card() {
 		
@@ -20,13 +21,13 @@ public class Card {
 		return cardId;
 	}
 	
-	public void setAttackId(int attackId) {
-		this.attackId = attackId;
-	}
+//	public void setAttackId(int attackId) { No longer in use, cards now has attack rating 
+//		this.attackId = attackId;
+//	}
 	
-	public int getAttackId() {
-		return attackId;
-	}
+//	public int getAttackId() {
+//		return attackId;
+//	}
 	
 	public void setName(String name) {
 		this.name = name;
@@ -58,5 +59,12 @@ public class Card {
 	
 	public int getDefense() {
 		return defense;
+	}
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+	
+	public int getAttack() {
+		return attack;
 	}
 }

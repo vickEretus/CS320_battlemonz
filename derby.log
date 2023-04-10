@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sat Apr 08 13:08:42 EDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-61d7-732c-00000d9ea958 
+on database directory C:\CS320-Battlemonz-DB\library.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/cs320_spring2023/CS320_Derby/CS320_Derby/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_301-b09
+user.dir=C:\cs320_spring2023\CS320_battlemonz
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

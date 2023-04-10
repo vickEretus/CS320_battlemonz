@@ -11,42 +11,42 @@ import edu.ycp.cs320.booksdb.model.Card;
 
 public class InitialData {
 
-	// reads initial Author data from CSV file and returns a List of Authors
-	public static List<Attack> getAttacks() throws IOException {
-		List<Attack> attackList = new ArrayList<Attack>();
-		ReadCSV readAttacks = new ReadCSV("attacks.csv"); //                            Change this to card.csv
-		try {
-			// auto-generated primary key for authors table
-			Integer attackId = 1;
-			while (true) {
-				List<String> tuple = readAttacks.next();
-				if (tuple == null) {
-					break;
-				}
-				Iterator<String> i = tuple.iterator();
-				Attack attack = new Attack();
-
-				// read author ID from CSV file, but don't use it
-				// it's there for reference purposes, just make sure that it is correct
-				// when setting up the BookAuthors CSV file				
-				Integer.parseInt(i.next());
-				// auto-generate author ID, instead
-				attack.setAttackId(attackId++);
-				//attack.setPower(i.next());
-				attack.setType(i.next());
-				attackList.add(attack);
-				
-//				author.setAuthorId(authorId++);				
-//				author.setLastname(i.next());
-//				author.setFirstname(i.next());
-//				authorList.add(author);
-			}
-			System.out.println("attacksList loaded from CSV file");
-			return attackList;
-		} finally {
-			readAttacks.close();
-		}
-	}
+//	// reads initial Author data from CSV file and returns a List of Authors
+//	public static List<Attack> getAttacks() throws IOException {
+//		List<Attack> attackList = new ArrayList<Attack>();
+//		ReadCSV readAttacks = new ReadCSV("attacks.csv"); //                            Change this to card.csv
+//		try {
+//			// auto-generated primary key for authors table
+//			Integer attackId = 1;
+//			while (true) {
+//				List<String> tuple = readAttacks.next();
+//				if (tuple == null) {
+//					break;
+//				}
+//				Iterator<String> i = tuple.iterator();
+//				Attack attack = new Attack();
+//
+//				// read author ID from CSV file, but don't use it
+//				// it's there for reference purposes, just make sure that it is correct
+//				// when setting up the BookAuthors CSV file				
+//				Integer.parseInt(i.next());
+//				// auto-generate author ID, instead
+//				attack.setAttackId(attackId++);
+//				//attack.setPower(i.next());
+//				attack.setType(i.next());
+//				attackList.add(attack);
+//				
+////				author.setAuthorId(authorId++);				
+////				author.setLastname(i.next());
+////				author.setFirstname(i.next());
+////				authorList.add(author);
+//			}
+//			System.out.println("attacksList loaded from CSV file");
+//			return attackList;
+//		} finally {
+//			readAttacks.close();
+//		}
+//	}
 	
 	// reads initial Book data from CSV file and returns a List of Books
 	public static List<Card> getCards() throws IOException {
@@ -70,10 +70,12 @@ public class InitialData {
 				// auto-generate book ID, instead
 				
 				card.setCardId(cardId++);
-				card.setAttackId(Integer.parseInt(i.next()));
-				card.setDefense(Integer.parseInt(i.next()));
-				card.setHP(Integer.parseInt(i.next()));
+				//card.setAttackId(Integer.parseInt(i.next())); no longer in use 
 				card.setName(i.next());
+				card.setType(i.next());
+				card.setHP(Integer.parseInt(i.next()));
+				card.setDefense(Integer.parseInt(i.next()));
+				card.setAttack(Integer.parseInt(i.next()));
 				cardList.add(card);
 				
 				
@@ -114,8 +116,8 @@ public class InitialData {
 				Integer.parseInt(i.next());
 				// auto-generate book ID, instead
 				account.setAccountId(accountId++);
-				account.setPassword(i.next());
 				account.setUsername(i.next());
+				account.setPassword(i.next());
 				
 				accountList.add(account);
 				
