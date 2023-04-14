@@ -1,3 +1,4 @@
+
 package edu.ycp.cs320.battlemonsterz.model;
 
 import static org.junit.Assert.*;
@@ -9,7 +10,7 @@ import org.junit.Test;
 
 //import edu.ycp.cs320.battlemonsterz.model.Card;
 
-public class UserTest {
+public class AccountTest {
 
 	// needed parameters
 	private Deck deck_one;
@@ -18,10 +19,10 @@ public class UserTest {
 	private boolean loggedIn;
 	
 	// users to test
-	private User user_one;
-	private User user_two;
-	private User user_three;
-	private User user_four;
+	private Account user_one;
+	private Account user_two;
+	private Account user_three;
+	private Account user_four;
 	
 	@Before
 	public void setUp() {
@@ -30,10 +31,10 @@ public class UserTest {
 		deck_one = new Deck(new Card(90.0, 94.0, 66.0, Type.GRASS, "vader"));
 		deck_two = new Deck(new Card(94.0, 99.0, 57.0, Type.FIRE, "trance"));
 	
-		user_one = new User("user456", "incorrect"); 
-		user_two = new User("user123","snuffles", deck_one);
-		user_three = new User("user","eggs", deck_two, loggedIn);
-		user_four = new User();
+		user_one = new Account("user456", "incorrect"); 
+		user_two = new Account("user123","snuffles", deck_one);
+		user_three = new Account("user","eggs", deck_two, loggedIn);
+		user_four = new Account();
 
 	
 	}
@@ -179,3 +180,4 @@ public class UserTest {
 	
 
 }
+

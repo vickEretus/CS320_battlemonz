@@ -1,3 +1,4 @@
+
 package edu.ycp.cs320.battlemonsterz.controller;
 
 import static org.junit.Assert.assertTrue;
@@ -6,16 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import edu.ycp.cs320.battlemonsterz.model.User;
+import edu.ycp.cs320.battlemonsterz.model.Account;
 
-public class UserControllerTest {
-	private UserController controller;
-	private User model;
+public class AccountControllerTest {
+	private AccountController controller;
+	private Account model;
 	
 	@Before
 	public void setUp() {
-		controller = new UserController();
-		model = new User();
+		controller = new AccountController();
+		model = new Account();
 		controller.setModel(model);
 	}
 	
@@ -29,7 +30,7 @@ public class UserControllerTest {
 	// test setters
 	@Test
 	public void testSetModel() {
-		User model_check = new User();
+		Account model_check = new Account();
 		controller.setModel(model_check);
 		assertTrue(controller.getModel().equals(model_check));
 	}
@@ -62,3 +63,4 @@ public class UserControllerTest {
 	
 	
 }
+
