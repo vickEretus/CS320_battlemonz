@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.battlemonsterz.controller.CardController;
 import edu.ycp.cs320.battlemonsterz.controller.GameController;
 import edu.ycp.cs320.battlemonsterz.model.Card;
 import edu.ycp.cs320.battlemonsterz.model.Deck;
@@ -58,7 +57,6 @@ public class CardDatabaseServlet extends HttpServlet {
 			// must create the controller each time, since it doesn't persist between POSTs
 			// the view does not alter data, only controller methods should be used for that
 			// thus, always call a controller method to operate on the data
-		CardController controller = new CardController();
 		Card model = new Card();
 			
 		

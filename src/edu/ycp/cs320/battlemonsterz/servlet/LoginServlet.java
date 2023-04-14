@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.battlemonsterz.controller.UserController;
-import edu.ycp.cs320.battlemonsterz.model.User;
+import edu.ycp.cs320.battlemonsterz.controller.AccountController;
+import edu.ycp.cs320.battlemonsterz.model.Account;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,11 +35,11 @@ public class LoginServlet extends HttpServlet {
 		String resultpassword;
 		
 
-		User model = new User();
+		Account model = new Account();
 
 		// create GuessingGame controller - controller does not persist between requests
 		// must recreate it each time a Post comes in
-		UserController controller = new UserController();
+		AccountController controller = new AccountController();
 		
 		// assign model reference to controller so that controller can access model
 		controller.setModel(model);
