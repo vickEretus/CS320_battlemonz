@@ -2,33 +2,31 @@ package edu.ycp.cs320.battlemonsterz.controller;
 
 import edu.ycp.cs320.battlemonsterz.model.*;
 
-
-
-public class AccountController {
+public class UserController {
 	
 	// fields
-	private Account model;
+	private User model;
 	
 	
 	
 	// constructors
-	public AccountController(Account model) {
+	public UserController(User model) {
 		this.model = model;
 	}
 	
-	public AccountController() {
+	public UserController() {
 		
 	}
 	
 	
 	// methods
 	
-	public Account getModel() {
+	public User getModel() {
 		return model;
 		
 	}
 	
-	public void setModel(Account model) {
+	public void setModel(User model) {
 		this.model = model;
 	}
 	
@@ -60,4 +58,3 @@ public class AccountController {
 	
 	
 }
-

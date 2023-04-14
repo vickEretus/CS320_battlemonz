@@ -20,7 +20,6 @@ public class Game {
 		this.deck_two = deck_two;
 		this.currentplayer = currentplayer;
 		finished = false;
-		status = "Game In Progress";
 		
 	}
 	
@@ -30,7 +29,6 @@ public class Game {
 		this.currentplayer = currentplayer;
 		this.round = round;
 		finished = false;
-		status = "Game In Progress";
 	}
 	
 	public Game() {
@@ -39,7 +37,6 @@ public class Game {
 		deck_one = new Deck();
 		deck_two = new Deck();
 		finished = false;
-		status = "Game In Progress";
 		
 	}
 	
@@ -77,18 +74,10 @@ public class Game {
 		}
 	}
 			
-
 	
-	public String getStatus() {
-		return status;
-	}
 	
 	public int getRound() {
 		return round;
-	}
-	
-	public boolean getFinished() {
-		return finished;
 	}
 	
 	// setters
@@ -127,10 +116,6 @@ public class Game {
 		}
 	
 		
-	}
-	
-	public void setFinished(boolean finished) {
-		this.finished = finished;
 	}
 	
 	public void setRound(int round) {

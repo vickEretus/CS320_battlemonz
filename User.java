@@ -3,7 +3,7 @@ package edu.ycp.cs320.battlemonsterz.model;
 // model class for users
 // only the controller should be allowed to call the set methods
 
-public class Account{
+public class User{
 	// fields
 	private String username;
 	private String password;
@@ -11,28 +11,28 @@ public class Account{
 	private boolean isLoggedIn;
 	
 	// constructors
-	public Account(String username, String password) {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 		isLoggedIn = false;
 		deck = new Deck();
 	}
 	
-	public Account(String username, String password, Deck deck) {
+	public User(String username, String password, Deck deck) {
 		this.username = username;
 		this.password = password;
 		isLoggedIn = false;
 		this.deck = deck;
 	}
 	
-	public Account(String username, String password, Deck deck, boolean isLoggedIn) {
+	public User(String username, String password, Deck deck, boolean isLoggedIn) {
 		this.username = username;
 		this.password = password;
 		this.isLoggedIn = isLoggedIn;
 		this.deck = deck;
 	}
 	
-	public Account() {
+	public User() {
 		this.username = null;
 		this.password = null;
 		isLoggedIn = false;
@@ -93,4 +93,5 @@ public class Account{
 }
 	
 	
-
+	
+	
