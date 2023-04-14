@@ -1,3 +1,4 @@
+
 package edu.ycp.cs320.battlemonsterz.model;
 
 // model class for Cards
@@ -5,6 +6,7 @@ package edu.ycp.cs320.battlemonsterz.model;
 
 public class Card {
 	// fields
+	private int card_id;
 	private double max_health;
 	private double health, attack_rating, defense_rating;
 	private Type type;
@@ -66,6 +68,10 @@ public class Card {
 		return url;
 	}
 	
+	public int getID() {
+		return card_id;
+	}
+	
 	// setters
 	
 	public void setHealth(double health) {
@@ -96,6 +102,10 @@ public class Card {
 	
 	public void setURL(String url) {
 		this.url = url;
+	}
+	
+	public void setID(int id) {
+		card_id = id;
 	}
 	
 	
