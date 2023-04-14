@@ -8,7 +8,6 @@ public class Deck {
 	// fields
 	private ArrayList<Card> cards;
 	private double deck_health;
-	private Card card;
 	
 	
 	// constructors
@@ -18,12 +17,6 @@ public class Deck {
 	
 	public Deck(ArrayList<Card> cards) {
 		this.cards = cards;
-		
-	}
-	
-	public Deck(Card card) {
-		cards = new ArrayList<>();
-		cards.add(card);
 		
 	}
 	
@@ -42,12 +35,12 @@ public class Deck {
 	}
 	
 	public Double getTeamHealth() { // get total team health
-		double sum = 0.0;
+		double sum = 0;
 		for (int i = 0; i < cards.size(); i++) {
 			sum += cards.get(i).getHealth();
 		}
 		deck_health = sum;
-		return sum;
+		return deck_health;
 	}
 	
 	
@@ -57,16 +50,12 @@ public class Deck {
 		
 	}
 	
-	public Card deleteLastCard() { // deletes card from collection
-		Card card = cards.get(cards.size()-1);
+	public void deleteLastCard() { // deletes card from collection
 		cards.remove(cards.size() - 1);
-		return card;
 	}
 	
-	public Card deleteCard(int index) { // deletes specified card
-		Card card = cards.get(index);
+	public void deleteCard(int index) { // deletes specified card
 		cards.remove(index);
-		return card;
 	}
 	
 
