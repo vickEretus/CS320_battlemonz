@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import edu.ycp.cs320.booksdb.model.Account;
-import edu.ycp.cs320.booksdb.model.Attack;
-import edu.ycp.cs320.booksdb.model.Card;
+import edu.ycp.cs320.battlemonsterz.model.Deck;
+import edu.ycp.cs320.battlemonsterz.model.Type;
+import edu.ycp.cs320.battlemonsterz.model.Card;
+import edu.ycp.cs320.battlemonsterz.model.Account;
 
 public class InitialData {
 
@@ -68,14 +69,13 @@ public class InitialData {
 				// when setting up the BookAuthors CSV file
 				Integer.parseInt(i.next());
 				// auto-generate book ID, instead
-				
-				card.setCardId(cardId++);
+				card.setID(cardId++);
 				//card.setAttackId(Integer.parseInt(i.next())); no longer in use 
 				card.setName(i.next());
-				card.setType(i.next());
-				card.setHP(Integer.parseInt(i.next()));
-				card.setDefense(Integer.parseInt(i.next()));
-				card.setAttack(Integer.parseInt(i.next()));
+				card.setType(Type.valueOf(i.next()));
+				card.setHealth(Double.parseDouble(i.next()));
+				card.setDefenseRating(Double.parseDouble(i.next()));
+				card.setAttackRating(Double.parseDouble(i.next()));
 				cardList.add(card);
 				
 				

@@ -9,6 +9,8 @@ public class Account{
 	private String password;
 	private Deck deck;
 	private boolean isLoggedIn;
+	private int accountId;
+
 	
 	// constructors
 	public Account(String username, String password) {
@@ -65,6 +67,13 @@ public class Account{
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+	
+	public int getAccountId() {
+		return accountId;
 	}
 	
 	public void setIsLoggedIn(boolean bool) { 

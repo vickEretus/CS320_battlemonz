@@ -3,11 +3,12 @@ package edu.ycp.cs320.booksdb.persist;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import edu.ycp.cs320.booksdb.model.Account;
-import edu.ycp.cs320.booksdb.model.Attack;
-import edu.ycp.cs320.booksdb.model.Card;
-import edu.ycp.cs320.booksdb.model.Pair;
+
+import edu.ycp.cs320.battlemonsterz.model.Deck;
+import edu.ycp.cs320.battlemonsterz.model.Card;
+import edu.ycp.cs320.battlemonsterz.model.Account;
 
 public class FakeDatabase implements IDatabase {
 	
@@ -44,8 +45,9 @@ public class FakeDatabase implements IDatabase {
 	public Card findCardByCardId(int cardId) {
 		Card theCard  = new Card();
 		for(Card cards: cardList ) {
-			if(cards.getCardId() == cardId ) {
+			if(cards.getID() == cardId ) {
 				theCard = cards;
+				
 			}
 		}
 		return theCard;
@@ -64,14 +66,14 @@ public class FakeDatabase implements IDatabase {
 	
 
 	@Override
-	public Integer insertNewAccountByUsernameAndPassword(String username, String password) {
-		Integer ID = -1;
-		for(Account account: accountList ) {
-			if(account.getUsername() == username && account.getPassword() == password ) {
-				ID = account.getAccountId();
-			}
-		}
-		return ID;
+	public void insertNewAccountByUsernameAndPassword(String username, String password) {
+				Account account = new Account();
+				account.setPassword(password);
+				account.setUsername(username);
+				account.setAccountId(accountList.size());
+				accountList.add(account);
+			
+		
 	}
 
 	@Override
@@ -83,5 +85,53 @@ public class FakeDatabase implements IDatabase {
 			}
 		
 		return result;
+	}
+
+	@Override
+	public List<Account> findallAccounts() {
+		List<Account> result = new ArrayList<Account>();
+		for (Account accounts: accountList) {
+			
+				result.add(accounts);
+			}
+		
+		return result;
+	}
+
+
+
+	@Override
+	public Deck selectRandomCards() {
+		Deck ranDeck = new Deck();
+		Random rand = new Random();
+		int randInt =  rand.nextInt(15);	
+		int amount = 0;
+		for (Card card: cardList) {
+			if(card.getID() == randInt && amount < 2) {
+			ranDeck.addCard(card);
+			randInt = rand.nextInt(15);	
+			amount++;
+			}
+		}
+	
+		return ranDeck;	
+			
+		}
+		
+	
+
+
+
+	@Override
+	public void insertDeckIntoUser(String username, Deck deck) {
+		Account account = new Account();
+		for (Account accounts: accountList) {
+			if(account.getUsername() == username) {
+				accounts.addDeck(deck);
+			}
+			
+		
+		}
+		
 	}
 }
