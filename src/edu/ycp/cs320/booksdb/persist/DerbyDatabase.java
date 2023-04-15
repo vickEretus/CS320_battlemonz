@@ -8,7 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+
+import edu.ycp.cs320.battlemonsterz.model.Deck;
 import edu.ycp.cs320.booksdb.model.Account;
 import edu.ycp.cs320.booksdb.model.Attack;
 import edu.ycp.cs320.booksdb.model.Card;
@@ -298,6 +301,36 @@ public class DerbyDatabase implements IDatabase {
 				}
 			}
 		});
+	}
+
+	@Override
+	public List<edu.ycp.cs320.battlemonsterz.model.Account> findallAccounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public edu.ycp.cs320.battlemonsterz.model.Card findCardByCardId(int cardId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Deck selectRandomCards() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertNewAccountByUsernameAndPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertDeckIntoUser(String username, Deck deck) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
