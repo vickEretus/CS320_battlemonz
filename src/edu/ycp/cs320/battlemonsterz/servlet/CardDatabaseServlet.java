@@ -1,20 +1,25 @@
+
 package edu.ycp.cs320.battlemonsterz.servlet;
 
 
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import edu.ycp.cs320.battlemonsterz.controller.GameController;
+import edu.ycp.cs320.battlemonsterz.controller.AccountController;
+import edu.ycp.cs320.battlemonsterz.controller.DeckController;
+
 import edu.ycp.cs320.battlemonsterz.model.Card;
 import edu.ycp.cs320.battlemonsterz.model.Deck;
-import edu.ycp.cs320.battlemonsterz.model.Game;
-import edu.ycp.cs320.booksdb.persist.DatabaseProvider;
-import edu.ycp.cs320.booksdb.persist.IDatabase;
+import edu.ycp.cs320.battlemonsterz.model.Account;
 
 public class CardDatabaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,68 +36,65 @@ public class CardDatabaseServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		
-		System.out.println("CardDatabase Servlet: doPost");
-		
-		if (req.getParameter("back") != null) {
-            // call index JSP
-            req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
-        }
-	
-		
+	        throws ServletException, IOException {
+	    
+	    System.out.println("CardDatabase Servlet: doPost");
 
-		// holds the error message text, if there is any
-		String errorMessage = null;
+	    if (req.getParameter("back") != null) {
+	    	  resp.sendRedirect(req.getContextPath() + "/index.jsp");
+	    	  return;
+	    	}
+	    
+	    /* CHECK HTTP SESSION FOR USER AND IF THEY HAVE SAVED CARDS
+	     * IF CARD_NAME1, 2, AND 3 ARE NULL, CHOSEN CARDS WILL BE EMPTY
+	     IF FILLED, DISPLAY CARDS
+	     * 
+	     */
+	  
+	    
+	    String[] selectedCardNames = req.getParameterValues("card");
+	    List<String> selectedCards = Arrays.asList(selectedCardNames);
 
-		// result of calculation goes here
-		Double result = null;
-		
-		String resulturl = "";
-		
-		
-		
-		
-		// decode POSTed form parameters and dispatch to controller
-		//try {
-			
-			// otherwise, data is good, do the calculation
-			// must create the controller each time, since it doesn't persist between POSTs
-			// the view does not alter data, only controller methods should be used for that
-			// thus, always call a controller method to operate on the data
-		Card model = new Card();
-			
-		
-		
-			
-		 
-		
-		// Add parameters as request attributes
-		/*if (req.getParameter("add") != null) {
-			collection.addCard(selectedCard);
-		} else if (req.getParameter("remove") != null) {
-			collection.deleteLastCard();
-		} else {
-			throw new ServletException("Unknown command");
-		}*/
+	   
+	    /* DATABASE METHODS TO RETREIVE THE CARDS IN THE LIST BASED ON THE NAME
+	     SAVE THE CARDS TO THE HTTP SESSION USER WHEN THEY SUBMIT THE FORM USING DECKCONTROLLER
+	     */
+	    // set the request attribute for the selected card names
+	    req.setAttribute("selectedCardNames", selectedCardNames);
+	   
+	    // forward the request to the JSP
+	    req.getRequestDispatcher("/_view/carddatabase.jsp").forward(req, resp);
+	}
+	
 
-	
-	
-		// add result objects as attributes
-		// this adds the errorMessage text and the result to the response
-		req.setAttribute("errorMessage", errorMessage);
-		req.setAttribute("resulturl", resulturl);
-		
-		// Forward to view to render the result HTML document
-		req.getRequestDispatcher("/_view/carddatabase.jsp").forward(req, resp);
+	private List<String> getCardNames() {
+	    // create a list of card names
+	    List<String> cardNames = new ArrayList<>();
+	    cardNames.add("vader");
+	    cardNames.add("vixon");
+	    cardNames.add("smokedux");
+	    cardNames.add("zeus");
+	    cardNames.add("heathen");
+	    
+	    cardNames.add("trance");
+	    cardNames.add("nethertalon");
+	    cardNames.add("firebreather");
+	    cardNames.add("glowzee");
+	    cardNames.add("brightsoul");
+	    
+	    cardNames.add("coolwind");
+	    cardNames.add("splashfist");
+	    cardNames.add("searvoid");
+	    cardNames.add("braveface");
+	    cardNames.add("poseidon");
+	    // add more card names as needed
+	    return cardNames;
 	}
 
-	// gets double from the request with attribute named s
-	private Double getDoubleFromParameter(String s) {
-		if (s == null || s.equals("")) {
-			return null;
-		} else {
-			return Double.parseDouble(s);
-		}
-	}
+// gets double from the request with attribute named s
+private String getStringFromParameter(String s) {
+	return s;
 }
+}
+
+	
