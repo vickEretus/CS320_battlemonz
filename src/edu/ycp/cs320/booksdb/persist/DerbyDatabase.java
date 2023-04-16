@@ -12,11 +12,9 @@ import java.util.Random;
 
 
 import edu.ycp.cs320.battlemonsterz.model.Deck;
-import edu.ycp.cs320.booksdb.model.Account;
-import edu.ycp.cs320.booksdb.model.Attack;
-import edu.ycp.cs320.booksdb.model.Card;
-import edu.ycp.cs320.booksdb.model.BookAuthor;
-import edu.ycp.cs320.booksdb.model.Pair;
+import edu.ycp.cs320.battlemonsterz.model.Type;
+import edu.ycp.cs320.battlemonsterz.model.Card;
+import edu.ycp.cs320.battlemonsterz.model.Account;
 
 public class DerbyDatabase implements IDatabase {
 	static {
@@ -154,17 +152,18 @@ public class DerbyDatabase implements IDatabase {
 		account.setAccountId(resultSet.getInt(index++));
 		account.setPassword(resultSet.getString(index++));
 		account.setUsername(resultSet.getString(index++));
+		account.addCard(resultSet.getInt(index++));
 		
 	}
 	
 	// retrieves Book information from query result set
 	private void loadCard(Card card, ResultSet resultSet, int index) throws SQLException {		
-		card.setCardId(resultSet.getInt(index++));
-		card.setDefense(resultSet.getInt(index++));
-		card.setHP(resultSet.getInt(index++));
+		card.setID(resultSet.getInt(index++));
+		card.setDefenseRating(resultSet.getInt(index++));
+		card.setHealth(resultSet.getInt(index++));
 		card.setName(resultSet.getString(index++));
-		card.setType(resultSet.getString(index++));
-		card.setAttack(resultSet.getInt(index++));
+		card.setType(Type.valueOf(resultSet.getString(index++)));
+		card.setAttackRating(resultSet.getInt(index++));
 	}
 	
 
@@ -211,6 +210,9 @@ public class DerbyDatabase implements IDatabase {
 							"		generated always as identity (start with 1, increment by 1), " +
 							"	username varchar(70)," +
 							"	password varchar(70)" +
+							"   card_1 integer," +
+							"   card_2 integer," +
+							"   card_3 integer" +
 							")"
 					);
 					stmt3.executeUpdate();
@@ -270,10 +272,10 @@ public class DerbyDatabase implements IDatabase {
 					for (Card card : cardList) {
 //						insertBook.setInt(1, card.getCardId());		// auto-generated primary key, don't insert this
 						insertCard.setString(1, card.getName());
-						insertCard.setString(2, card.getType());
-						insertCard.setInt(3, card.getHP());
-						insertCard.setInt(4, card.getDefense());
-						insertCard.setInt(5, card.getAttack());
+						insertCard.setString(2, card.getType().toString());
+						insertCard.setFloat(3, (float) card.getHealth());
+						insertCard.setFloat(4, (float) card.getDefenseRating());
+						insertCard.setFloat(5, (float) card.getAttackRating());
 
 		
 						insertCard.addBatch();
@@ -303,35 +305,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 
-	@Override
-	public List<edu.ycp.cs320.battlemonsterz.model.Account> findallAccounts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public edu.ycp.cs320.battlemonsterz.model.Card findCardByCardId(int cardId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Deck selectRandomCards() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insertNewAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insertDeckIntoUser(String username, Deck deck) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 }

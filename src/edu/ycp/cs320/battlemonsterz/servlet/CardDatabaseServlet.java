@@ -2,6 +2,7 @@ package edu.ycp.cs320.battlemonsterz.servlet;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import edu.ycp.cs320.battlemonsterz.controller.GameController;
 import edu.ycp.cs320.battlemonsterz.model.Card;
 import edu.ycp.cs320.battlemonsterz.model.Deck;
 import edu.ycp.cs320.battlemonsterz.model.Game;
+import edu.ycp.cs320.booksdb.persist.DatabaseProvider;
+import edu.ycp.cs320.booksdb.persist.IDatabase;
 
 public class CardDatabaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -61,9 +64,6 @@ public class CardDatabaseServlet extends HttpServlet {
 			
 		
 		
-		
-			
-				
 			
 		 
 		

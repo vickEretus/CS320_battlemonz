@@ -3,7 +3,10 @@ package edu.ycp.cs320.booksdb;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.ycp.cs320.booksdb.model.Card;
+import edu.ycp.cs320.battlemonsterz.model.Deck;
+import edu.ycp.cs320.battlemonsterz.model.Card;
+import edu.ycp.cs320.battlemonsterz.model.Account;
+import java.util.Random;
 import edu.ycp.cs320.booksdb.persist.DatabaseProvider;
 import edu.ycp.cs320.booksdb.persist.IDatabase;
 
@@ -25,7 +28,7 @@ public class AllCardsQuery {
 		else {
 			for (Card cards : cardList) {
 				
-				System.out.println(cards.getCardId() + " | " + cards.getName() + " | " + cards.getType() + " | " + cards.getHP() + " | " + cards.getDefense());
+				System.out.println(cards.getID() + " | " + cards.getName() + " | " + cards.getType() + " | " + cards.getHealth() + " | " + cards.getAttackRating() + " | " + cards.getDefenseRating());
 			}
 		}
 	}
