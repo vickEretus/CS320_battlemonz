@@ -118,7 +118,9 @@ public class InitialData {
 				account.setAccountId(accountId++);
 				account.setUsername(i.next());
 				account.setPassword(i.next());
-				
+				account.setCard1(i.next());
+				account.setCard2(i.next());
+				account.setCard3(i.next());
 				accountList.add(account);
 				
 				
