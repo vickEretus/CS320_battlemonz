@@ -1,3 +1,4 @@
+
 package edu.ycp.cs320.battlemonsterz.servlet;
 
 
@@ -97,7 +98,3 @@ private String getStringFromParameter(String s) {
 }
 
 	
-				
-
-
-		

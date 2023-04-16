@@ -14,11 +14,12 @@ public interface IDatabase {
 	public List<Card> findAllCards();
 	public List<Account> findallAccounts();
 	public Card findCardByCardId(int cardId);
+	public Card findCardByName(String cardName);
 	public Integer findAccountByUsernameAndPassword(String username, String password);
 	public Deck selectRandomCards();
 	
 	public void insertNewAccountByUsernameAndPassword(String username, String password);
 	public void insertDeckIntoUser(String username, Deck deck);
 	
-	
+	public void saveDeckToUserByName(String username,String cardname1,String cardname2,String cardname3);
 }

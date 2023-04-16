@@ -57,7 +57,7 @@ public class FakeDatabase implements IDatabase {
 	public Integer findAccountByUsernameAndPassword(String username, String password) {
 		Integer ID = -1;
 		for(Account account: accountList ) {
-			if(account.getUsername() == username && account.getPassword() == password ) {
+			if(account.getUsername().equals(username)&& account.getPassword().equalsIgnoreCase(password) ) {
 				ID = account.getAccountId();
 			}
 		}
@@ -126,7 +126,7 @@ public class FakeDatabase implements IDatabase {
 	public void insertDeckIntoUser(String username, Deck deck) {
 		Account account = new Account();
 		for (Account accounts: accountList) {
-			if(account.getUsername() == username) {
+			if(account.getUsername().equals(username)) {
 				accounts.addDeck(deck);
 			}
 			
