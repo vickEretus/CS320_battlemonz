@@ -113,16 +113,15 @@ public class DerbyDatabase implements IDatabase {
 
 
 	@Override
-	public Integer findAccountByUsernameAndPassword(String username, String password) {
+	public Account findAccountByUsernameAndPassword(String username, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public Integer insertNewAccountByUsernameAndPassword(String username, String password) {
+	public void insertNewAccountByUsernameAndPassword(String username, String password) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 
@@ -152,8 +151,9 @@ public class DerbyDatabase implements IDatabase {
 		account.setAccountId(resultSet.getInt(index++));
 		account.setPassword(resultSet.getString(index++));
 		account.setUsername(resultSet.getString(index++));
-		account.addCard(resultSet.getInt(index++));
-		
+		account.setCard1(resultSet.getString(index++));
+		account.setCard2(resultSet.getString(index++));
+		account.setCard3(resultSet.getString(index++));
 	}
 	
 	// retrieves Book information from query result set
@@ -303,6 +303,44 @@ public class DerbyDatabase implements IDatabase {
 				}
 			}
 		});
+	}
+
+	@Override
+	public List<Account> findallAccounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Card findCardByName(String cardName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Account findAccountByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Deck selectRandomCards() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void insertDeckIntoUser(String username, Deck deck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

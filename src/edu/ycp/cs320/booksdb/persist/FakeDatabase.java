@@ -54,14 +54,14 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public Integer findAccountByUsernameAndPassword(String username, String password) {
-		Integer ID = -1;
-		for(Account account: accountList ) {
-			if(account.getUsername().equals(username)&& account.getPassword().equalsIgnoreCase(password) ) {
-				ID = account.getAccountId();
+	public Account findAccountByUsernameAndPassword(String username, String password) {
+		Account account =  new Account();
+		for(Account accounts: accountList ) {
+			if(accounts.getUsername().equals(username)&& accounts.getPassword().equalsIgnoreCase(password) ) {
+				account = accounts;
 			}
 		}
-		return ID;
+		return account;
 	}
 	
 
@@ -134,4 +134,51 @@ public class FakeDatabase implements IDatabase {
 		}
 		
 	}
-}
+
+	@Override
+	public Card findCardByName(String cardName) {
+		Card result = new Card();
+		for (Card card: cardList) {
+			if(card.getName().equals(cardName)) {
+				result = card;
+				}
+			}
+		
+		return result;
+	}
+
+	@Override
+	public void saveDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
+		Deck deck = new Deck();
+		Account account = findAccountByUsername(username);
+		
+	
+		for (Card card: cardList) {
+			if(card.getName().equals(cardname1)) {
+				deck.addCard(card);
+			}
+			if(card.getName().equals(cardname2)) {
+				deck.addCard(card);
+			}
+			if(card.getName().equals(cardname3)) {
+				deck.addCard(card);
+			}
+				
+				
+			}
+		account.addDeck(deck);
+		}
+
+	@Override
+	public Account findAccountByUsername(String username) {
+		Account result = new Account();
+		for (Account account: accountList) {
+			if(account.getUsername().equals(username)) {
+				result = account;
+				}
+			}
+		
+		return result;
+	}
+	}
+
