@@ -24,7 +24,16 @@
 		h1{
 		size:50px;
 		}
-		
+		input{
+		background-color:orangeRed;
+		border-radius:100px;
+		width:250px;
+		height:125px;
+		margin-left:100px;
+		margin-right:100px;
+		margin-top:30px;
+		font-size:50px;
+		}
 		img{
 		height:100px;
 		width:75px;
@@ -79,20 +88,23 @@
 		
 		<input name = "back" type = "submit" value = "Go back">
 		<div id = "title">
-		<h1>Fight!</h1>
+		<h1>Choose Number of Players</h1>
 		</div>
+		<input name = "1p" type = "submit" value = "1 Player">
+		<input name = "2p" type = "submit" value = "2 Player">
 		
-		<h2 id="round">Round: 1</h2>
 		<br><br>
 			<table>
 			<tr> 
+			
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/coolwind.jpeg">
+			</td>
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/vader.jpeg">
-			<p>Health : <span id="player1Health">100</span></p>
-			<input type="button" name="attack" value="Play card" onclick="playCard()"></td>
+			</td>
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/vixon.jpeg">
-				<p>Health : <span id="player2Health">100</span></p>
+			</td>				
 			</tr>
-			</table>
+			
 	
 		</form>
 	</body>
