@@ -27,7 +27,7 @@ public interface IDatabase {
 	
 	public void insertNewAccountByUsernameAndPassword(String username, String password);
 	
-	public void insertDeckIntoUser(String username, Deck deck);
+	//public void insertDeckIntoUser(String username, Deck deck);
 	
 	public void saveDeckToUserByName(String username,String cardname1,String cardname2,String cardname3);
 }
