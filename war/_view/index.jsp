@@ -44,7 +44,7 @@
 		<form action="${pageContext.servletContext.contextPath}/index" method = "post">
 		
 		<div id="title">
-		<h1>Navigation</h1>
+		<h1>Welcome</h1>
 			</div>
 			<div>
 			<input name = "login" type = "submit" value = "Back">
