@@ -72,6 +72,25 @@
 		}
 		
 		</style>
+		<script>
+		function validateForm() {
+		  var username = document.getElementById("username").value.trim();
+		  var password = document.getElementById("password").value.trim();
+		  
+		  if (username == "" || password == "") {
+		    alert("Please fill in all fields.");
+		    return false;
+		  }
+		  
+		  if (/\s/.test(username) || /\s/.test(password)) {
+		    alert("Please remove any spaces in the username or password.");
+		    return false;
+		  }
+		  
+		  return true;
+		}
+				
+		</script>
 	</head>
 
 	<body>
@@ -87,40 +106,29 @@
 			<table>
 				<tr>
 					<td class="label">Username </td>
-					<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="username" size="12" value = "${User.username}" /></td>
+					<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="username" id="username" size="12" value = "${User.username}" /></td>
 				</tr>
 			
 				<tr>
 	
 					<td  class="label">Password</td>
-					<td> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="password" size="12" value = "${User.password}"/></td>
+					<td> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="password" id="password" size="12" value = "${User.password}"/></td>
 				</tr>
 				
 			</table>
 			<br><br>
 			
 			<div id = "create_button">
-			<input type="Submit" name="login" value="Create Account / Login">
+			<input type="Submit" name="login" value="Create Account / Login" onclick="return validateForm()">
 			
 			</div>
 			
 			<br>
-			
-			<div id = "guest">
-			
-			<p id = "t"> Don't want an account?</p><a id = "guest_link" href = "index">Play as guest</a>
+		
 			
 			</div>
+		
 			
-			
-			</div>
-			<br><br><br><br><br><br><br><br><br><br>
-			
-			<div id = "output_account">
-			Created information: <br><br>
-			Username: ${resultusername} <br>
-			Password: ${resultpassword}
-			</div>
 			
 			
 			

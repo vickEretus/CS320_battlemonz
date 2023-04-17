@@ -34,6 +34,20 @@ public class PlayServlet extends HttpServlet {
             // call index JSP
             req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
         }
+		else if (req.getParameter("1player") != null) {
+            // call game JSP
+            req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
+        }
+        
+        else if (req.getParameter("2player") != null) {
+            // call game JSP
+            req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
+        }
+
+        
+        else {
+        	throw new ServletException("Unknown command");
+        }
 	
 		
 

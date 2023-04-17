@@ -4,103 +4,110 @@
 
 <html>
 	<head>
-		<title>Game</title>
-		
-		 <style type="text/css">
+		<title>Card Game</title>
+		<style>
 		body{
 		background-color:black;
-		color:white;
-		display:flex;
-		flex-direction:column;
-		align-items:center;
-		justify-content:center;
+		color:OrangeRed;}
+		img{
+		height:100px;
+		width:75px;
 		}
-		
-		td{
-		color:green;
-		}
-		
-		#game_board{
-		width:100%;
-		height:500px;
-		}
-		
-		#left, #middle, #right{
-		width:33.3%;
-		}
-		
-	
-		}
-		
-		h1, h2{
-		color:OrangeRed;
-		}
-		
-		
 		
 		</style>
 		
-	
-	</head>
+		<script>
+		function checkSelection() {
+			  var cardOne = document.getElementById("cardOne").value;
+			  var cardTwo = document.getElementById("cardTwo").value;
 
+			  if (cardOne == "" || cardTwo == "") {
+			    alert("Please select both cards before proceeding.");
+			    return false;
+			  }
+
+			  document.getElementById("cardOneIndex").value = document.getElementById("cardOne").selectedIndex;
+			  document.getElementById("cardTwoIndex").value = document.getElementById("cardTwo").selectedIndex;
+
+			  return true;
+			}
+		</script>
+	</head>
 	<body>
-		<c:if test="${! empty errorMessage}">
-			<div class="error">${errorMessage}</div>
-		</c:if>
+		<div style="float: left; width: 30%;">
+			<h2>Deck One</h2>
+			<ul>
+			
 	
-		<form action="${pageContext.servletContext.contextPath}/game" method="post">
-		<a id = "back_link" href = "index">Back</a>
-			<div id = "health_bars">
-				<table>
+				<li><img src="${pageContext.request.contextPath}/Images/${d1c1name}.jpeg"/>
+				${d1c1name}
+				${d1c1health}</li>
+				<li><img src="${pageContext.request.contextPath}/Images/${d1c2name}.jpeg"/>
+				${d1c2name}
+				${d1c2health}</li>
+				<li><img src="${pageContext.request.contextPath}/Images/${d1c3name}.jpeg"/>
+				${d1c3name}
+				${d1c3health}</li>
+			</ul>
+			<p>Health: ${deck_one_health}</p>
+			<p>Round Damage: ${damage_two} </p>
+		</div>
+		
+		<div style="float: right; width: 30%;">
+			<h2>Deck Two</h2>
+			<ul>
+				<li><img src="${pageContext.request.contextPath}/Images/${d2c1name}.jpeg"/>
+				${d2c1name}
+				${d2c1health}
+				</li>
+				<li><img src="${pageContext.request.contextPath}/Images/${d2c2name}.jpeg"/>
+				${d2c2name}
+				${d2c2health}</li>
+				<li><img src="${pageContext.request.contextPath}/Images/${d2c3name}.jpeg"/>
+				${d2c3name}
+				${d2c3health}</li>
+			</ul>
+			<p>Health: ${deck_two_health}</p>
+			<p>Round Damage: ${damage_one} </p>
+		</div>
+		
+		<div style="margin: 0 auto; width: 30%;">
+			<h2>Selected Cards</h2>
+			<form action="${pageContext.servletContext.contextPath}/game" method="post" onsubmit="return checkSelection()">
+				<select id = "cardOne" name="card_one">
+				  <option value="">Select card one</option>
+					<option value="0">${d1c1name}</option>
+					<option value="1">${d1c2name}</option>
+					<option value="2">${d1c3name}</option>
+				</select>
 				
-				<tr>
-				<td><h2>Team 1 Health: </h2>
-				<td><h2>Team 2 Health: </h2>
-				</tr>
+				<select id = "cardTwo" name="card_two">
+				  <option value="">Select card two</option>
+					<option value="0">${d2c1name}</option>
+					<option value="1">${d2c2name}</option>
+					<option value="2">${d2c3name}</option>
+				</select>
+				
+				  <input type="hidden" id="cardOneIndex" name="card_one_index" value=""/>
+  				<input type="hidden" id="cardTwoIndex" name="card_two_index" value=""/>
 				
 				
-				<tr>
-				<!-- <td><h2>${Deck.deck_health}</h2></td>
-				<td><h2>${Deck.deck_health}</h2></td>-->
-				<td> </td>
-				
-				<td> </td>
-				</tr>
-				
-				
-			</table>
-				
-			</div>
-				
+				<input id = "fightButton" type="submit" name="fight" value="Fight"/>
+			</form>
 			
+			 <c:choose>
+        <c:when test="${game_over}">
+            <p>The game is over.</p>
+        </c:when>
+        <c:otherwise>
+            <p>Keep playing!</p>
+        </c:otherwise>
+    </c:choose>
+
+   
 			
-			<div id = "game_board">
-			<div id ="left">
-			<img>
-			<img>
-			<img>
-			</div>
-			
-			<div id = "middle">
-			<h1>Round ${Game.round}</h1>
-			<h1>Player ${Game.currentplayer}'s turn</h1>
-			<img>
-			<img>
-			<input type="submit" name="place" value="Play Card">
-			</div>
-			
-			<div id = "right">
-			<img>
-			<img>
-			<img>
-			</div>
-			
-			</div>
-			
-			<div>
-			<h1>Game status: ${Game.status}</h1>
-			</div>
-			
-		</form>
+		
+			<p>Round: ${game.round}</p>
+		</div>
 	</body>
 </html>

@@ -8,11 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import edu.ycp.cs320.booksdb.model.Attack;
-import edu.ycp.cs320.booksdb.model.Card;
-import edu.ycp.cs320.booksdb.model.BookAuthor;
-import edu.ycp.cs320.booksdb.model.Pair;
+
+import edu.ycp.cs320.battlemonsterz.model.Deck;
+import edu.ycp.cs320.battlemonsterz.model.Type;
+import edu.ycp.cs320.battlemonsterz.model.Card;
+import edu.ycp.cs320.battlemonsterz.model.Account;
 
 public class DerbyDatabase implements IDatabase {
 	static {
@@ -81,7 +83,7 @@ public class DerbyDatabase implements IDatabase {
 	// TODO: Change it here and in SQLDemo.java under CS320_LibraryExample_Lab06->edu.ycp.cs320.sqldemo
 	// TODO: DO NOT PUT THE DB IN THE SAME FOLDER AS YOUR PROJECT - that will cause conflicts later w/Git
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320-2019-LibraryExample-DB/library.db;create=true");		
+		Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320-Battlemonz-DB/library.db;create=true");		
 		
 		// Set autocommit() to false to allow the execution of
 		// multiple queries/statements as part of the same transaction.
@@ -99,40 +101,35 @@ public class DerbyDatabase implements IDatabase {
 		System.out.println("Loading initial data...");
 		db.loadInitialData();
 		
-		System.out.println("Library DB successfully initialized!");
+		System.out.println("Battlemonz DB successfully initialized!");
 	}
 
 
 	@Override
-	public List<Pair<Attack, Card>> findCardByCardId(int cardId) {
+	public Card findCardByCardId(int cardId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public List<Pair<Attack, Card>> findAccountByUsernameAndPassword(String username, String password) {
+	public Account findAccountByUsernameAndPassword(String username, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public Integer insertNewAccountByUsernameAndPassword(String username, String password) {
+	public void insertNewAccountByUsernameAndPassword(String username, String password) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 
-	@Override
-	public List<Pair<Attack, Card>> findAllCardsWithAttacks() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 	@Override
-	public List<Attack> findAllCards() {
+	public List<Card> findAllCards() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -142,22 +139,31 @@ public class DerbyDatabase implements IDatabase {
 	
 	
 	// retrieves Author information from query result set
-	private void loadAttack(Attack attack, ResultSet resultSet, int index) throws SQLException {
+//	private void loadAttack(Attack attack, ResultSet resultSet, int index) throws SQLException {
+//	
+//		attack.setAttackId(resultSet.getInt(index++));
+//		attack.setPower(resultSet.getInt(index++));
+//		attack.setType(resultSet.getString(index++));
+//		
+//	}
 	
-		attack.setAttackId(resultSet.getInt(index++));
-		attack.setPower(resultSet.getInt(index++));
-		attack.setType(resultSet.getString(index++));
-		
+	private void loadAccount(Account account, ResultSet resultSet, int index) throws SQLException {
+		account.setAccountId(resultSet.getInt(index++));
+		account.setPassword(resultSet.getString(index++));
+		account.setUsername(resultSet.getString(index++));
+		account.setCard1(resultSet.getString(index++));
+		account.setCard2(resultSet.getString(index++));
+		account.setCard3(resultSet.getString(index++));
 	}
 	
 	// retrieves Book information from query result set
 	private void loadCard(Card card, ResultSet resultSet, int index) throws SQLException {		
-		card.setCardId(resultSet.getInt(index++));
-		card.setAttackId(resultSet.getInt(index++));
-		card.setDefense(resultSet.getInt(index++));
-		card.setHP(resultSet.getInt(index++));
+		card.setID(resultSet.getInt(index++));
+		card.setDefenseRating(resultSet.getInt(index++));
+		card.setHealth(resultSet.getInt(index++));
 		card.setName(resultSet.getString(index++));
-		card.setType(resultSet.getString(index++));
+		card.setType(Type.valueOf(resultSet.getString(index++)));
+		card.setAttackRating(resultSet.getInt(index++));
 	}
 	
 
@@ -166,51 +172,59 @@ public class DerbyDatabase implements IDatabase {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
-				PreparedStatement stmt1 = null;
+				//PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;				
 			
 				try {
-					stmt1 = conn.prepareStatement(
-						"create table authors (" +
-						"	author_id integer primary key " +
-						"		generated always as identity (start with 1, increment by 1), " +									
-						"	lastname varchar(40)," +
-						"	firstname varchar(40)" +
-						")"
-					);	
-					stmt1.executeUpdate();
-					
-					System.out.println("Authors table created");
+//					stmt1 = conn.prepareStatement(
+//						"create table attacks (" +
+//						"	attack_Id integer primary key " +
+//						"		generated always as identity (start with 1, increment by 1), " +									
+//						"	type varchar(40)," +
+//						"	power varchar(40)" +
+//						")"
+//					);	
+//					stmt1.executeUpdate();
+//					
+//					System.out.println("Attacks table created");
 					
 					stmt2 = conn.prepareStatement(
-							"create table books (" +
-							"	book_id integer primary key " +
+							"create table cards (" +
+							"	card_Id integer primary key " +
 							"		generated always as identity (start with 1, increment by 1), " +
-//							"	author_id integer constraint author_id references authors, " +  	// this is now in the BookAuthors table
-							"	title varchar(70)," +
-							"	isbn varchar(15)," +
-							"   published integer" +
+							"	name varchar(70)," +
+							"	type varchar(15)," +
+							"   hp integer," +
+							"   defense integer," +
+							"   attack integer" +
 							")"
 					);
 					stmt2.executeUpdate();
 					
-					System.out.println("Books table created");					
+					System.out.println("Cards table created");					
 					
 					stmt3 = conn.prepareStatement(
-							"create table bookAuthors (" +
-							"	book_id   integer constraint book_id references books, " +
-							"	author_id integer constraint author_id references authors " +
+							"create table accounts (" +
+							"	account_Id  integer primary key " + 
+							"		generated always as identity (start with 1, increment by 1), " +
+							"	username varchar(70)," +
+							"	password varchar(70)" +
+							"   card_1 integer," +
+							"   card_2 integer," +
+							"   card_3 integer" +
 							")"
 					);
 					stmt3.executeUpdate();
 					
-					System.out.println("BookAuthors table created");					
+					System.out.println("Accounts table created");					
 										
 					return true;
 				} finally {
-					DBUtil.closeQuietly(stmt1);
+					//DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
+					DBUtil.closeQuietly(stmt3);
+
 				}
 			}
 		});
@@ -221,59 +235,114 @@ public class DerbyDatabase implements IDatabase {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
-				List<Attack> attackList;
+				//List<Attack> attackList;
+				List<Account> accountList;
 				List<Card> cardList;
 				
 				
 				try {
-					attackList     = InitialData.getAttacks();
+					//attackList     = InitialData.getAttacks();
+					accountList     = InitialData.getAccounts();
 					cardList       = InitialData.getCards();
 									
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
-				PreparedStatement insertAttack     = null;
+				//PreparedStatement insertAttack     = null;
+				PreparedStatement insertAccount     = null;
 				PreparedStatement insertCard       = null;
 
 				try {
+					//old attack structure might be imepenated again 
 					// must completely populate Authors table before populating BookAuthors table because of primary keys
-					insertAttack = conn.prepareStatement("insert into attacks (type, power) values (?, ?)");
-					for (Attack attack : attackList) {
-//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
-						insertAttack.setString(1, attack.getType());
-						insertAttack.setInt(2, attack.getPower());
-						insertAttack.addBatch();
-					}
-					insertAttack.executeBatch();
-					
-					System.out.println("Attacks table populated");
+//					insertAttack = conn.prepareStatement("insert into attacks (type, power) values (?, ?)");
+//					for (Attack attack : attackList) {
+////						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
+//						insertAttack.setString(1, attack.getType());
+//						insertAttack.setInt(2, attack.getPower());
+//						insertAttack.addBatch();
+//					}
+//					insertAttack.executeBatch();
+//					
+//					System.out.println("Attacks table populated");
 					
 					// must completely populate Books table before populating BookAuthors table because of primary keys
-					insertCard = conn.prepareStatement("insert into cards (attackId, name, type, hp, defense ) values (?, ?, ?, ?, ?)");
+					insertCard = conn.prepareStatement("insert into cards ( name, type, hp, defense, attack ) values (?, ?, ?, ?, ?)");
 					for (Card card : cardList) {
-//						insertBook.setInt(1, book.getBookId());		// auto-generated primary key, don't insert this
-						insertCard.setInt(1, card.getAttackId());	// this is now in the BookAuthors table
-						insertCard.setString(2, card.getName());
-						insertCard.setString(3, card.getType());
-						insertCard.setInt(4, card.getHP());
-						insertCard.setInt(5, card.getDefense());
+//						insertBook.setInt(1, card.getCardId());		// auto-generated primary key, don't insert this
+						insertCard.setString(1, card.getName());
+						insertCard.setString(2, card.getType().toString());
+						insertCard.setFloat(3, (float) card.getHealth());
+						insertCard.setFloat(4, (float) card.getDefenseRating());
+						insertCard.setFloat(5, (float) card.getAttackRating());
 
 		
 						insertCard.addBatch();
 					}
 					insertCard.executeBatch();
 					
-					System.out.println("Cards table populated");								
+					System.out.println("Cards table populated");	
+					
+					insertAccount = conn.prepareStatement("insert into accounts (username, password) values (?, ?)");
+					for (Account account: accountList) {
+//						insertAuthor.setInt(1, account.getaccountId());	// auto-generated primary key, don't insert this
+						insertAccount.setString(1, account.getUsername());
+						insertAccount.setString(2,account.getPassword());
+						insertAccount.addBatch();
+					}
+					insertAccount.executeBatch();
+					
+					System.out.println("Accounts table populated");
 					
 					return true;
 				} finally {
-					DBUtil.closeQuietly(insertAttack);
+					//DBUtil.closeQuietly(insertAttack);
+					DBUtil.closeQuietly(insertAccount);
 					DBUtil.closeQuietly(insertCard);					
 				}
 			}
 		});
 	}
-	
+
+	@Override
+	public List<Account> findallAccounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Card findCardByName(String cardName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Account findAccountByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Deck selectRandomCards() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void insertDeckIntoUser(String username, Deck deck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

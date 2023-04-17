@@ -8,7 +8,9 @@ public class GameController {
 	
 	// fields
 	private Game model;
-	private static double damage_modifier = 1.25;
+	private double damage_modifier = 0.10;
+	private double damage_taken = 0.0;
+	
 	
 	
 	// constructors
@@ -38,13 +40,8 @@ public class GameController {
 	}
 
 	
-	/*// method to check if the user's move is a valid move
-	public boolean makeMove(Game model, int player) {
-		
-	}*/
-	
 	public boolean checkWin(Game model) {
-		if ((model.getDeckOne().getTeamHealth() <= 0.0) ||  (model.getDeckTwo().getTeamHealth() <= 0.0)){
+		if (model.getFinished() == true) {
 			return true;
 		}
 		
@@ -53,52 +50,54 @@ public class GameController {
 		}
 	}
 	
-	public void attack(Card AttackCard, Card DefenseCard) { // user chooses to attack
+	public double attack(Card AttackCard, Card DefenseCard) { // user chooses to attack
 		
 		// within each type there is a typical attack and a damage modified attack
+
+		    // Determine the effective attack rating, taking into account the damage modifier and defense rating
+		    double effectiveAttackRating = AttackCard.getAttackRating();
+		    
+		    // grass type
+		    if (AttackCard.getType() == Type.GRASS) {
+		    	// damage modifications
+		        if (DefenseCard.getType() == Type.WATER) {
+		            effectiveAttackRating *= (1 + damage_modifier);
+		        } else if (DefenseCard.getType() == Type.FIRE) {
+		            effectiveAttackRating *= (1 - damage_modifier);
+		        } 
+		    } 
+		    
+		    // fire type
+		    else if (AttackCard.getType() == Type.FIRE) {
+		    	// damage modifications
+		        if (DefenseCard.getType() == Type.GRASS) {
+		            effectiveAttackRating *= (1 + damage_modifier);
+		        } else if (DefenseCard.getType() == Type.WATER) {
+		            effectiveAttackRating *= (1 - damage_modifier);
+		        }
+		    } 
+		    
+		    // water type
+		    else {
+		        if (DefenseCard.getType() == Type.FIRE) {
+		        	// damage modifications
+		            effectiveAttackRating *= (1 + damage_modifier);
+		        } else if (DefenseCard.getType() == Type.GRASS) {
+		            effectiveAttackRating *= (1 - damage_modifier);
+		        }
+		    }
+		    
+		    damage_taken = effectiveAttackRating - DefenseCard.getDefenseRating();
+	
 		
-		// grass type
-		if (AttackCard.getType() == Type.GRASS) {
-			if (DefenseCard.getType() != Type.WATER) { 
-				DefenseCard.setHealth(DefenseCard.getHealth() * AttackCard.getAttackRating());
-			}
-			else {
-				DefenseCard.setHealth(DefenseCard.getHealth() * AttackCard.getAttackRating() * damage_modifier);
-			}
-			
-		}
 		
-		// fire type
-		else if (AttackCard.getType() == Type.FIRE) {
-			if (DefenseCard.getType() != Type.GRASS) {
-				DefenseCard.setHealth(DefenseCard.getHealth() * (1-AttackCard.getAttackRating()));
-			}
-			else {
-				DefenseCard.setHealth(DefenseCard.getHealth() * (1-AttackCard.getAttackRating()) * damage_modifier);
-			}
-		}
-		
-		// water type
-		else {
-			if (DefenseCard.getType() != Type.FIRE) {
-				DefenseCard.setHealth(DefenseCard.getHealth() * AttackCard.getAttackRating());
-				
-			}
-			else {
-				DefenseCard.setHealth(DefenseCard.getHealth() * (1-AttackCard.getAttackRating()) * damage_modifier);
-			}
-			
-			
-		}
-		
+		// Reduce the defense card's health by the calculated damage
+	    DefenseCard.setHealth(Math.max(0, DefenseCard.getHealth() - damage_taken));
+	   
+	    return damage_taken;
 
 	}
 	
-	/*public void defend(Type defense_type) { // user chooses to defend
-		
-	}*/
-	
-
 	
 	
 	
