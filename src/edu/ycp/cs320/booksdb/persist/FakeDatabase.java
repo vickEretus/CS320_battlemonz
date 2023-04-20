@@ -122,18 +122,7 @@ public class FakeDatabase implements IDatabase {
 
 
 
-	@Override
-	public void insertDeckIntoUser(String username, Deck deck) {
-		Account account = new Account();
-		for (Account accounts: accountList) {
-			if(account.getUsername().equals(username)) {
-				accounts.addDeck(deck);
-			}
-			
-		
-		}
-		
-	}
+	
 
 	@Override
 	public Card findCardByName(String cardName) {
