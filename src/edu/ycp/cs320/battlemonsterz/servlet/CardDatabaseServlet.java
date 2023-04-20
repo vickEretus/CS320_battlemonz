@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import edu.ycp.cs320.battlemonsterz.model.Card;
 import edu.ycp.cs320.battlemonsterz.model.Deck;
+import edu.ycp.cs320.battlemonsterz.controller.FindAccountByUsernameController;
+import edu.ycp.cs320.battlemonsterz.controller.SaveDeckToUserController;
 import edu.ycp.cs320.battlemonsterz.model.Account;
 
 public class CardDatabaseServlet extends HttpServlet {
@@ -53,8 +55,8 @@ public class CardDatabaseServlet extends HttpServlet {
 	    System.out.println("CardDatabase Servlet: doPost");
 
 	    if (req.getParameter("back") != null) {
-	    	req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
-	    	return;
+	    	  resp.sendRedirect(req.getContextPath() + "/index.jsp");
+	    	  return;
 	    	}
 	    
 	    /* CHECK HTTP SESSION FOR USER AND IF THEY HAVE SAVED CARDS
@@ -62,11 +64,28 @@ public class CardDatabaseServlet extends HttpServlet {
 	     IF FILLED, DISPLAY CARDS
 	     * 
 	     */
-	  
 	    
-	    String[] selectedCardNames = req.getParameterValues("card");
-	    List<String> selectedCards = Arrays.asList(selectedCardNames);
-
+		String user = (String) req.getSession().getAttribute("user");
+	    
+	    String[] selectedCardNames = new String[3];
+	    
+	    FindAccountByUsernameController controller = new FindAccountByUsernameController();
+	  
+	    Account account = controller.getAccountByUsername(user);
+	    
+	    if (account.getCard1() == null || account.getCard2() == null || account.getCard3() == null) {
+	    	selectedCardNames =  req.getParameterValues("card");
+	    }
+	    
+	    else {
+	    	selectedCardNames[0] = account.getCard1();
+	    	selectedCardNames[1] = account.getCard2();
+	    	selectedCardNames[2] = account.getCard3();
+	    }
+	    
+	    SaveDeckToUserController savecontroller = new  SaveDeckToUserController();
+	    
+	    savecontroller.saveDecktoUser(user, selectedCardNames[0], selectedCardNames[1], selectedCardNames[2]);
 	   
 	    /* DATABASE METHODS TO RETREIVE THE CARDS IN THE LIST BASED ON THE NAME
 	     SAVE THE CARDS TO THE HTTP SESSION USER WHEN THEY SUBMIT THE FORM

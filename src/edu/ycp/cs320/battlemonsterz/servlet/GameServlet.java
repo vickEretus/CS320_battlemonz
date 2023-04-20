@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.battlemonsterz.controller.FindAccountByUsernameController;
+import edu.ycp.cs320.battlemonsterz.controller.FindCardByNameController;
 import edu.ycp.cs320.battlemonsterz.controller.GameController;
+import edu.ycp.cs320.battlemonsterz.controller.SelectRandomCardsController;
 import edu.ycp.cs320.battlemonsterz.model.Account;
 import edu.ycp.cs320.battlemonsterz.model.Card;
 import edu.ycp.cs320.battlemonsterz.model.Deck;
 import edu.ycp.cs320.battlemonsterz.model.Game;
-import edu.ycp.cs320.battlemonsterz.model.Type;
+
 
 public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,6 +46,12 @@ public class GameServlet extends HttpServlet {
 		double health_bar_one, health_bar_two;
 		Deck deck_one, deck_two;
 		Card d1_card_one, d1_card_two, d1_card_three, d2_card_one, d2_card_two, d2_card_three;
+		SelectRandomCardsController selectcontroller = new SelectRandomCardsController();
+		FindAccountByUsernameController findcontroller = new FindAccountByUsernameController();
+		FindCardByNameController findcardcontroller = new FindCardByNameController();
+		
+		Account account = findcontroller.getAccountByUsername(user);
+		
 		
 		
 		round = 1;
@@ -53,22 +62,24 @@ public class GameServlet extends HttpServlet {
 		health_bar_two = 0.0;
 		
 
-		deck_one = new Deck();
-		deck_two = new Deck();
 		
-		d1_card_one = new Card(87, 65, 98, Type.FIRE, "glowzee");
-		d1_card_two = new Card(82, 73, 95, Type.GRASS, "vixon");
-		d1_card_three = new Card(84, 67, 99, Type.WATER, "coolwind");
+		deck_one = new Deck();
+		
+
+		// get logged in user's deck
+		d1_card_one = findcardcontroller.getCardByName(account.getCard1());
+		d1_card_two = findcardcontroller.getCardByName(account.getCard2());
+		d1_card_three = findcardcontroller.getCardByName(account.getCard3());
+		
+		
 		deck_one.addCard(d1_card_one);
 		deck_one.addCard(d1_card_two);
 		deck_one.addCard(d1_card_three);
 		
-		d2_card_one = new Card(81, 80, 89, Type.FIRE, "brightsoul");
-		d2_card_two = new Card(82, 76, 92, Type.GRASS, "zeus");
-		d2_card_three = new Card(93, 69, 88, Type.WATER, "searvoid");
-		deck_two.addCard(d2_card_one);
-		deck_two.addCard(d2_card_two);
-		deck_two.addCard(d2_card_three);
+		
+		
+		deck_two = selectcontroller.getRandomCards();
+	
 		
 	
 		Game model = new Game(deck_one, deck_two, turn, round);
