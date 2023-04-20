@@ -66,20 +66,22 @@
 			
 			<div id = "info">
 			<h1>
-			Username
+			Username: ${account.username}
+			</h1>
+			<h1>
+			Card 1: ${account.card1}
+			</h1>
+			<h1>
+			Card 2: ${account.card2}
+			</h1>
+			<h1>
+			Card 3: ${account.card3}
 			</h1>
 
-			<h1>
-			Password 
-			</h1>
 			
-			<h1>
-			Wins
-			</h1>
 			
-			<h1>
-			Losses 
-			</h1>
+			
+		
 			
 			
 			</div>
