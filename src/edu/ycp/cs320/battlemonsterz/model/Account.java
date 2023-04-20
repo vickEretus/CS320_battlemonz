@@ -43,6 +43,24 @@ public class Account{
 		deck = new Deck();
 		
 	}
+	
+	public Account(String username, String password, String card1, String card2, String card3) {
+		this.username = username;
+		this.password = password;
+		this.card1 = card1;
+		this.card2 = card2;
+		this.card3 = card3;
+		
+		
+	}
+	
+	public Account(String username, String card1, String card2, String card3) {
+		this.username = username;
+		this.card1 = card1;
+		this.card2 = card2;
+		this.card3 = card3;
+		
+	}
 	// getters
 	
 	public String getUsername() {

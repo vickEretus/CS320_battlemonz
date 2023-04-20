@@ -24,6 +24,20 @@ public class GameServlet extends HttpServlet {
 
 		System.out.println("Game Servlet: doGet");	
 		
+		String user = (String) req.getSession().getAttribute("user");
+		if (user == null) {
+			System.out.println("   User: <" + user + "> not logged in or session timed out");
+			
+			// user is not logged in, or the session expired
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+
+		// now we have the user's User object,
+		// proceed to handle request...
+		
+		System.out.println("   User: <" + user + "> logged in");
+		
 		boolean game_over;
 		int round, turn;
 		double health_bar_one, health_bar_two;
@@ -153,13 +167,6 @@ public class GameServlet extends HttpServlet {
 	    req.getSession().setAttribute("deck_one_health", game.getDeckOne().getTeamHealth());
 	    req.getSession().setAttribute("deck_two_health", game.getDeckTwo().getTeamHealth());
 	    req.getSession().setAttribute("gameover", game_over);
-	    
-	    
-		
-		
-		
-				
-		
 		
 		
 		
@@ -167,12 +174,4 @@ public class GameServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 
-	// gets double from the request with attribute named s
-	private Double getDoubleFromParameter(String s) {
-		if (s == null || s.equals("")) {
-			return null;
-		} else {
-			return Double.parseDouble(s);
-		}
-	}
 }

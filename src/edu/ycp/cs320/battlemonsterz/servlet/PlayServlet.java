@@ -20,6 +20,20 @@ public class PlayServlet extends HttpServlet {
 
 		System.out.println("Play Servlet: doGet");	
 		
+		String user = (String) req.getSession().getAttribute("user");
+		if (user == null) {
+			System.out.println("   User: <" + user + "> not logged in or session timed out");
+			
+			// user is not logged in, or the session expired
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+
+		// now we have the user's User object,
+		// proceed to handle request...
+		
+		System.out.println("   User: <" + user + "> logged in");
+		
 		// call JSP to generate empty form
 		req.getRequestDispatcher("/_view/play.jsp").forward(req, resp);
 	}
@@ -51,39 +65,9 @@ public class PlayServlet extends HttpServlet {
 	
 		
 
-		// holds the error message text, if there is any
-		String errorMessage = null;
-
-		// result of calculation goes here
-		Double result = null;
 		
-		// decode POSTed form parameters and dispatch to controller
-		try {
-			
-			// otherwise, data is good, do the calculation
-			// must create the controller each time, since it doesn't persist between POSTs
-			// the view does not alter data, only controller methods should be used for that
-			// thus, always call a controller method to operate on the data
 		
-				Game model = new Game();
-				GameController controller = new GameController();
 		
-			
-				
-			
-		} catch (NumberFormatException e) {
-			errorMessage = "Invalid double";
-		}
-		
-		// Add parameters as request attributes
-
-	
-	
-		
-		// add result objects as attributes
-		// this adds the errorMessage text and the result to the response
-		req.setAttribute("errorMessage", errorMessage);
-		req.setAttribute("result", result);
 		
 		// Forward to view to render the result HTML document
         if (req.getParameter("game") != null) {
@@ -96,12 +80,5 @@ public class PlayServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/play.jsp").forward(req, resp);}
 	}
 
-	// gets double from the request with attribute named s
-	private Double getDoubleFromParameter(String s) {
-		if (s == null || s.equals("")) {
-			return null;
-		} else {
-			return Double.parseDouble(s);
-		}
-	}
+	
 }
