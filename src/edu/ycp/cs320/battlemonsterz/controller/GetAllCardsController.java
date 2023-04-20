@@ -38,7 +38,7 @@ public class GetAllCardsController {
 				}			
 			}
 			
-			// return accounts
+			// return cards
 			return cards;
 		}
 	}
