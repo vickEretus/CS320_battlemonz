@@ -23,6 +23,7 @@ public class AccountTest {
 	private Account user_two;
 	private Account user_three;
 	private Account user_four;
+	private Account user_five;
 	
 	@Before
 	public void setUp() {
@@ -35,6 +36,7 @@ public class AccountTest {
 		user_two = new Account("user123","snuffles", deck_one);
 		user_three = new Account("user","eggs", deck_two, loggedIn);
 		user_four = new Account();
+		user_five = new Account("userw3", "fetch", "Vixon" , "Vader", "Donald");
 
 	
 	}
@@ -47,6 +49,7 @@ public class AccountTest {
 		assertEquals("user123", user_two.getUsername());
 		assertEquals("user", user_three.getUsername());
 		assertEquals(null, user_four.getUsername());
+		assertEquals("userw3", user_five.getUsername());
 		
 		
 		
@@ -58,6 +61,7 @@ public class AccountTest {
 		assertEquals("snuffles", user_two.getPassword());
 		assertEquals("eggs", user_three.getPassword());
 		assertEquals(null, user_four.getPassword());
+		assertEquals("fetch", user_five.getPassword());
 	
 		
 	}
@@ -85,6 +89,16 @@ public class AccountTest {
 		assertEquals(false, user_four.getisLoggedIn());
 	
 	}
+	
+	@Test
+	public void testGetCardNames() throws Exception {
+		assertEquals("Vixon", user_five.getCard1());
+		assertEquals("Vader", user_five.getCard2());
+		assertEquals("Donald", user_five.getCard3());
+
+	
+	}
+	
 	
 	
 
@@ -173,10 +187,24 @@ public class AccountTest {
 		
 	}
 	
+	@Test
+	public void testSetCardNames() throws Exception {
+		
+		user_five.setCard1("yoyo");
+		user_five.setCard2("firebreather");
+		user_five.setCard3("trance");
+	
+		
+		
+		assertEquals("yoyo", user_five.getCard1());
+		assertEquals("firebreather", user_five.getCard2());
+		assertEquals("trance", user_five.getCard3());
+		
 	
 	
 	
 	
+	}
 	
 
 }
