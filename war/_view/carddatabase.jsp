@@ -15,8 +15,16 @@
 		}
 		
 		input{
-		background-color:orangeRed;
+	
+		
+		background-color:OrangeRed;
+		width: 100px;
+		height:30px;
+		border-radius:20px;
+		margin-left:0px;
+    	display: block;
 		}
+		
 		
 		img{
 		height:133px;
