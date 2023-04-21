@@ -38,7 +38,7 @@
 		height:30px;
 		border-radius:20px;
 		margin: 0 auto;
-    display: block;
+    	display: block;
 		
 		}
 		

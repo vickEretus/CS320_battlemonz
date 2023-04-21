@@ -12,8 +12,8 @@
 		input{
 		background-color:orangeRed;
 		border-radius:100px;
-		width:500px;
-		height:250px;
+		width:350px;
+		height:175px;
 		margin-left:100px;
 		margin-right:100px;
 		margin-top:30px;
@@ -33,13 +33,7 @@
 	</head>
 
 	<body>
-		<!-- <a href= "addNumbers">Add numbers</a>
-		<a href= "multiplyNumbers">Multiply numbers</a>
-		<a href= "guessingGame"> Guessing Game</a>
-		
-		<button onclick="document.location='addNumbers'">Add Numbers</button>
-		<button onclick="document.location='multiplyNumbers'">Multiply Numbers</button>
-		<button onclick="document.location='guessingGame'">Guessing Game</button>-->
+	
 		
 		<form action="${pageContext.servletContext.contextPath}/index" method = "post">
 		
