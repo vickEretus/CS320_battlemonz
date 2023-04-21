@@ -115,11 +115,7 @@
 					<td> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="password" id="password" size="12" value = "${User.password}"/></td>
 				</tr>
 				
-				<tr>
-	
-					
-					<td> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="errorMessage"  size="12" value = "${errorMessage}"/></td>
-				</tr>
+				
 				
 			</table>
 			<br><br>
