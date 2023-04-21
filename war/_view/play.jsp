@@ -24,6 +24,7 @@
 		h1{
 		size:50px;
 		}
+		
 		input{
 		background-color:orangeRed;
 		border-radius:100px;
@@ -34,25 +35,24 @@
 		margin-top:-20px;
 		font-size:50px;
 		}
+		
 		img{
 		height:100px;
-		width:75px;
-	
-		
+		width:75px;		
 		}
+		
 		lmargin {
   		float: left;
   		padding: 20px;
   		width: 20%;
-  		height: 500px;
-  		
+  		height: 500px;  		
 		}
 		1player {
   		float: left;
   		padding: 20px;
   		width: 30%;
   		height: 500px;
-    			}
+    	}
     	2player {
   		float: left;
   		padding: 20px;
