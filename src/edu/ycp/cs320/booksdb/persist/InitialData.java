@@ -69,7 +69,7 @@ public class InitialData {
 				// when setting up the BookAuthors CSV file
 				Integer.parseInt(i.next());
 				// auto-generate book ID, instead
-				card.setID(cardId++);
+				//card.setID(cardId++);
 				//card.setAttackId(Integer.parseInt(i.next())); no longer in use 
 				card.setName(i.next());
 				card.setType(Type.valueOf(i.next()));

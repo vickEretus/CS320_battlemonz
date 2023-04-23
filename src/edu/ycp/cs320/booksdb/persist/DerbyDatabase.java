@@ -13,6 +13,8 @@ import java.util.Random;
 
 import edu.ycp.cs320.battlemonsterz.model.Deck;
 import edu.ycp.cs320.battlemonsterz.model.Type;
+//import edu.ycp.cs320.booksdb.persist.DBUtil;
+//import edu.ycp.cs320.booksdb.persist.DerbyDatabase.Transaction;
 import edu.ycp.cs320.battlemonsterz.model.Card;
 import edu.ycp.cs320.battlemonsterz.model.Account;
 
@@ -105,38 +107,6 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 
-	@Override
-	public Card findCardByCardId(int cardId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Account findAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void insertNewAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-	}
-
-
-
-
-
-	@Override
-	public List<Card> findAllCards() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
-	
 	
 	// retrieves Author information from query result set
 //	private void loadAttack(Attack attack, ResultSet resultSet, int index) throws SQLException {
@@ -159,11 +129,11 @@ public class DerbyDatabase implements IDatabase {
 	// retrieves Book information from query result set
 	private void loadCard(Card card, ResultSet resultSet, int index) throws SQLException {		
 		card.setID(resultSet.getInt(index++));
-		card.setDefenseRating(resultSet.getInt(index++));
-		card.setHealth(resultSet.getInt(index++));
 		card.setName(resultSet.getString(index++));
 		card.setType(Type.valueOf(resultSet.getString(index++)));
-		card.setAttackRating(resultSet.getInt(index++));
+		card.setDefenseRating(Double.parseDouble(resultSet.getString(index++)));
+		card.setHealth(resultSet.getDouble(index++));
+		card.setAttackRating(resultSet.getDouble(index++));
 	}
 	
 
@@ -191,13 +161,13 @@ public class DerbyDatabase implements IDatabase {
 					
 					stmt2 = conn.prepareStatement(
 							"create table cards (" +
-							"	card_Id integer primary key " +
+							"	card_ID integer primary key " +
 							"		generated always as identity (start with 1, increment by 1), " +
 							"	name varchar(70)," +
 							"	type varchar(15)," +
-							"   hp integer," +
-							"   defense integer," +
-							"   attack integer" +
+							"   hp varchar(15)," +
+							"   defense varchar(15)," +
+							"   attack varchar(15)" +
 							")"
 					);
 					stmt2.executeUpdate();
@@ -206,13 +176,13 @@ public class DerbyDatabase implements IDatabase {
 					
 					stmt3 = conn.prepareStatement(
 							"create table accounts (" +
-							"	account_Id  integer primary key " + 
+							"	account_ID  integer primary key " + 
 							"		generated always as identity (start with 1, increment by 1), " +
 							"	username varchar(70)," +
-							"	password varchar(70)" +
-							"   card_1 integer," +
-							"   card_2 integer," +
-							"   card_3 integer" +
+							"	password varchar(70)," +
+							"   card_1 varchar(15)," +
+							"   card_2 varchar(15)," +
+							"   card_3 varchar(15)" +
 							")"
 					);
 					stmt3.executeUpdate();
@@ -284,11 +254,14 @@ public class DerbyDatabase implements IDatabase {
 					
 					System.out.println("Cards table populated");	
 					
-					insertAccount = conn.prepareStatement("insert into accounts (username, password) values (?, ?)");
+					insertAccount = conn.prepareStatement("insert into accounts (username, password, card_1, card_2, card_3) values (?, ?, ?, ?, ?)");
 					for (Account account: accountList) {
 //						insertAuthor.setInt(1, account.getaccountId());	// auto-generated primary key, don't insert this
 						insertAccount.setString(1, account.getUsername());
 						insertAccount.setString(2,account.getPassword());
+						insertAccount.setString(3, account.getCard1());
+						insertAccount.setString(4, account.getCard2());
+						insertAccount.setString(5, account.getCard3());
 						insertAccount.addBatch();
 					}
 					insertAccount.executeBatch();
@@ -305,20 +278,453 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 
-	@Override
-	public List<Account> findallAccounts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
 
 	@Override
 	public Card findCardByName(String cardName) {
+	    return executeTransaction(new Transaction<Card>() {
+	        @Override
+	        public Card execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            try {
+	                stmt = conn.prepareStatement(
+	                        "SELECT cards.* " +
+	                        "FROM cards " +
+	                        "WHERE cards.name = ?"
+	                );
+	                
+	                stmt.setString(1, cardName);
+	                
+	                Card card = new Card();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                if (resultSet.next()) {
+	                   
+	                    
+	                    loadCard(card, resultSet, 1);
+	                    
+	                   
+	                } 
+	                
+	                    return card;
+	                
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+
+	
+	@Override
+	public Card findCardByCardID(int cardID) {
+		return executeTransaction(new Transaction<Card>() {
+			@Override
+			public Card execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+
+				// try to retrieve Authors and Books based on Author's last name, passed into query
+				try {
+					stmt = conn.prepareStatement(
+							"select cards.* " +
+							"  from  cards " +
+							"  where cards.card_ID = ? " 
+					
+					
+					);
+					stmt.setInt(1, cardID);
+					
+					// establish the list of (Author, Book) Pairs to receive the result
+					Card result = new Card();
+					
+					// execute the query, get the results, and assemble them in an ArrayLsit
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) {
+						
+						loadCard(result, resultSet, 1);						
+
+					}
+					
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+
+
+	@Override
+	public Account findAccountByUsernameAndPassword(String username, String password) {
+		return executeTransaction(new Transaction<Account>() {
+	        @Override
+	        public Account execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            try {
+	                stmt = conn.prepareStatement(
+	                        "SELECT accounts.* " +
+	                        "FROM accounts " +
+	                        "WHERE accounts.username = ? and accounts.password = ?"
+	                );
+	                
+	                stmt.setString(1, username);
+	                stmt.setString(2, password);
+
+	                
+	                Account account = new Account();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                if (resultSet.next()) {
+	                   
+	                    
+	                    loadAccount(account, resultSet, 1);
+	                    
+	                    
+	                } 
+	                
+	                    return account;
+	                
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+
+	
+	@Override
+	public Integer insertNewAccountByUsernameAndPassword(String username, String password) {
+		return executeTransaction(new Transaction<Integer>() {
+			@Override
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				
+				
+				ResultSet resultSet1 = null;
+				ResultSet resultSet3 = null;
+				
+				// for saving author ID and book ID
+				Integer account_id = -1;
+				
+
+				// try to retrieve author_id (if it exists) from DB, for Author's full name, passed into query
+				try {
+					stmt1 = conn.prepareStatement(
+							"select account_id from accounts " +
+							"  where username = ? and password = ? "
+					);
+					stmt1.setString(1, username);
+					stmt1.setString(2, password);
+					
+					// execute the query, get the result
+					resultSet1 = stmt1.executeQuery();
+
+					
+					// if Author was found then save author_id					
+					if (resultSet1.next())
+					{
+						account_id = resultSet1.getInt(1);
+						System.out.println("Account <" + username + ", " + password + "> found with ID: " + account_id );						
+					}
+					else
+					{
+						System.out.println("Account <" + username + ", " + password + "> not found");
+				
+						// if the Author is new, insert new Author into Authors table
+						if (account_id <= 0) {
+							// prepare SQL insert statement to add Author to Authors table
+							stmt2 = conn.prepareStatement(
+									"insert into accounts (username, password) " +
+									"  values(?, ?) "
+							);
+							stmt2.setString(1, username);
+							stmt2.setString(2, password);
+							
+							// execute the update
+							stmt2.executeUpdate();
+							
+							System.out.println("New Account <" + username + ", " + password + "> inserted in Authors table");						
+						
+							// try to retrieve author_id for new Author - DB auto-generates author_id
+							stmt3 = conn.prepareStatement(
+									"select account_id from accounts " +
+									"  where username = ? and password = ? "
+							);
+							stmt3.setString(1, username);
+							stmt3.setString(2, password);
+							
+							// execute the query							
+							resultSet3 = stmt3.executeQuery();
+							
+							// get the result - there had better be one							
+							if (resultSet3.next())
+							{
+								account_id = resultSet3.getInt(1);
+								System.out.println("New Account <" + username + ", " + password + "> ID: " + account_id);						
+							}
+							else	// really should throw an exception here - the new author should have been inserted, but we didn't find them
+							{
+								System.out.println("New Account <" + username + ", " + password + "> not found in Account table (ID: " + account_id);
+							}
+						}
+					}
+
+
+				
+					return account_id;
+				} finally {
+					DBUtil.closeQuietly(resultSet1);
+					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);					
+					DBUtil.closeQuietly(resultSet3);
+					DBUtil.closeQuietly(stmt3);					
+				
+				}
+			}
+		});
+	}
+	
+
+
+	@Override
+	public List<Card> findAllCards() {
+		return executeTransaction(new Transaction<List<Card>>() {
+			@Override
+			public List<Card> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select * from Cards " 
+					);
+					
+					List<Card> result = new ArrayList<Card>();
+					
+					resultSet = stmt.executeQuery();
+					
+					// for testing that a result was returned
+					Boolean found = false;
+					
+					while (resultSet.next()) {
+						found = true;
+						
+						Card card = new Card();
+						loadCard(card, resultSet, 1);
+						
+						result.add(card);
+					}
+					
+					// check if any authors were found
+					if (!found) {
+						System.out.println("No cards were found in the database");
+					}
+					
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+
+	@Override
+	public List<Account> findallAccounts() {
+		return executeTransaction(new Transaction<List<Account>>() {
+			@Override
+			public List<Account> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select * from accounts " 
+					);
+					
+					List<Account> result = new ArrayList<Account>();
+					
+					resultSet = stmt.executeQuery();
+					
+					// for testing that a result was returned
+					Boolean found = false;
+					
+					while (resultSet.next()) {
+						found = true;
+						
+						Account account = new Account();
+						loadAccount(account , resultSet, 1);
+						
+						result.add(account );
+					}
+					
+					// check if any authors were found
+					if (!found) {
+						System.out.println("No accounts were found in the database");
+					}
+					
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	
+	
+
+	@Override
+	public Account findAccountByUsername(String username) {
+		return executeTransaction(new Transaction<Account>() {
+	        @Override
+	        public Account execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            try {
+	                stmt = conn.prepareStatement(
+	                        "SELECT accounts.* " +
+	                        "FROM accounts " +
+	                        "WHERE accounts.username = ?"
+	                );
+	                
+	                stmt.setString(1, username);
+	                
+	                Account account = new Account();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                if (resultSet.next()) {
+	                   
+	                    
+	                    loadAccount(account, resultSet, 1);
+	                    
+	                    
+	                } 
+	                
+	                    return account;
+	                
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+
+	@Override
+	public Integer saveDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
+		return executeTransaction(new Transaction<Integer>() {
+			@Override
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				
+				
+				ResultSet resultSet1 = null;
+				ResultSet resultSet3 = null;
+				
+				// for saving author ID and book ID
+				Integer account_id = -1;
+				
+
+				// try to retrieve author_id (if it exists) from DB, for Author's full name, passed into query
+				try {
+					stmt1 = conn.prepareStatement(
+							"select accounts.* from accounts " +
+							"  where username = ? "
+					);
+					stmt1.setString(1, username);
+					
+					// execute the query, get the result
+					resultSet1 = stmt1.executeQuery();
+
+					
+					// if Author was found then save author_id					
+					if (resultSet1.next())
+					{
+						account_id = resultSet1.getInt(1);
+						System.out.println("Account <" + username + "> found with ID: " + account_id);						
+					
+							// prepare SQL insert statement to add Author to Authors table
+							stmt2 = conn.prepareStatement(
+									"update accounts "
+									+ "set card_1 = ? , card_2 = ?, card_3 = ?"
+									+ "WHERE account_id = ?" 
+							);
+							stmt2.setString(1, cardname1);
+							stmt2.setString(2, cardname2);
+							stmt2.setString(3, cardname3);
+							stmt2.setInt(4, account_id);
+							
+							// execute the update
+							stmt2.executeUpdate();
+							
+							System.out.println("New Cards <" + cardname1 + ", " + cardname2 + " , " + cardname3 + "> inserted in Account: <" + username + ">  ");						
+						
+							// try to retrieve author_id for new Author - DB auto-generates author_id
+							stmt3 = conn.prepareStatement(
+									"select account_id from accounts " +
+									"  where username = ?  "
+							);
+							stmt3.setString(1, username);
+							
+							// execute the query							
+							resultSet3 = stmt3.executeQuery();
+							
+							// get the result - there had better be one							
+							if (resultSet3.next())
+							{
+								account_id = resultSet3.getInt(1);
+								System.out.println("New Cards <" + cardname1 + ", " + cardname2 + " , " + cardname3 + "> ID: " + account_id);						
+							}
+							else	// really should throw an exception here - the new author should have been inserted, but we didn't find them
+							{
+								System.out.println("New Cards <" + cardname1 + ", " + cardname2 + " , " + cardname3 + "> not found in Account (ID: " + account_id);
+							}
+						}
+					
+					else {
+					System.out.println("Account <" + username + "> not found");
+
+					}
+					return account_id;
+				} finally {
+					DBUtil.closeQuietly(resultSet1);
+					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);					
+					DBUtil.closeQuietly(resultSet3);
+					DBUtil.closeQuietly(stmt3);					
+				
+				}
+			}
+		});
+	}
+		
+
+	@Override
+	public Account removeAccountByUsernameAndPassword(String username, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Account findAccountByUsername(String username) {
+	public Deck removeDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -329,19 +735,6 @@ public class DerbyDatabase implements IDatabase {
 		return null;
 	}
 
-
-
-	@Override
-	public void insertDeckIntoUser(String username, Deck deck) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void saveDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 

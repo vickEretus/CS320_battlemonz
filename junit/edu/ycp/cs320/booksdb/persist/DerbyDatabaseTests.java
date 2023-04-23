@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -37,7 +36,10 @@ public class DerbyDatabaseTests {
 		// creating DB instance here
 		DatabaseProvider.setInstance(new DerbyDatabase());
 		db = DatabaseProvider.getInstance();		
-		
+//		Scanner keyboard = new Scanner(System.in);
+//
+//		// Create the default IDatabase instance
+//		InitDatabase.init(keyboard);
 	}
 
 	@After
@@ -45,6 +47,7 @@ public class DerbyDatabaseTests {
 	}
 	
 	
+	@Test
 	public void testFindAllCards(){
 
 		System.out.println("\n*** Testing FindAllCards ***");
@@ -54,7 +57,7 @@ public class DerbyDatabaseTests {
 
 		// NOTE: this is a simple test to check if no results were found in the DB
 		if (cardList.isEmpty()) {
-			System.out.println("No Card found in library");
+			System.out.println("No Card found in Database");
 			fail("No Card returned from Battlemonz DB");
 		}
 		// NOTE: assembling the results into Author and Book lists so that they could be
@@ -70,74 +73,205 @@ public class DerbyDatabaseTests {
 		}
 	}
 	
-	public List<Account> findallAccounts(){
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public Card findCardByCardId(int cardId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public Card findCardByName(String cardName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	public Account findAccountByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public Deck selectRandomCards() {
-		// TODO Auto-generated method stub
-		return null;
+	@Test
+	public void testFindallAccounts(){
+		System.out.println("\n*** Testing findAllAccounts ***");
+		List<Account> accountList = db.findallAccounts();
+		
+		if(accountList.isEmpty()) {
+			System.out.println("No accounts found in Database");
+			fail("No accounts returned from Battlemonz DB");
+		}
+		else {
+			accounts = new ArrayList<Account>();
+			for(Account account: accountList) {
+				accounts.add(account);
+				System.out.println(account.getAccountId() +", " + account.getUsername() + ", " + account.getPassword()+ ", " 
+						+ account.getCard1() + ", " +  account.getCard2() + ", "  +  account.getCard3() + ", " );
+
+				 
+			}
+		}
 		
 	}
 	
-	public void insertNewAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-	}
 	
-	public void insertDeckIntoUser(String username, Deck deck) {
-		// TODO Auto-generated method stub
-	}
-	
-	public void saveDeckToUserByName(String username,String cardname1,String cardname2,String cardname3) {
-		// TODO Auto-generated method stub
-	}
+	@Test
+	public void testFindCardByCardID() { //int cardID
+		System.out.println("\n*** Testing findCardByCardID ***");
+		int cardID = 1;
+		
+		Card card =  db.findCardByCardID(cardID);
+		
+		if(card != null ) {
+			
+			System.out.println(card.getID() +", " + card.getName() + ", " + card.getType()+ ", " 
+					+ card.getHealth()+ ", " + card.getAttackRating()+ ", " + card.getDefenseRating());
+		}
+		else {
+				System.out.println("No Card found in Database");
+				fail("No Card returned from Battlemonz DB");
+			}
+			
+		}
 	
 
+	@Test
+	public void findCardByCardName() {
+	    System.out.println("\n*** Testing findCardByName ***");
+	    String cardName = "Vader";
+
+	        Card card = db.findCardByName(cardName);
+	        if (card != null) {
+	        	System.out.println(card.getID() +", " + card.getName() + ", " + card.getType()+ ", " 
+						+ card.getHealth()+ ", " + card.getAttackRating()+ ", " + card.getDefenseRating()); // Print all attributes using toString() method
+	        } else {
+	            System.out.println("No Card found in Database");
+	            fail("No Card returned from Battlemonz DB");
+	        }
+	    }  
+	       
+	
+	@Test
+	public void TestFindAccountByUsername() { //String username
+		  System.out.println("\n*** Testing findCardByName ***");
+		  String username = "admin";
+		    
+		        Account account =  db.findAccountByUsername(username);
+		        if (account != null) {
+		        	System.out.println(account.getAccountId() +", " + account.getUsername()+ ", " + account.getPassword()+ ", " 
+							+ account.getCard1() + ", " + account.getCard2() + ", " + account.getCard3() ); // Print all attributes using toString() method
+		        } else {
+		            System.out.println("No Account found in Database");
+		            fail("No Account returned from Battlemonz DB");
+		        }
+		    }
+		
 
 	@Test
 	public void testFindAccountByUsernameAndPassword() {
 		System.out.println("\n*** Testing findAccountByUsernameAndPassword ***");
 		
-		String username = "Chapman";
-		String password = "Graham";
+		String username = "admin";
+		String password = "admin";
 
 		// get the list of (Author, Book) pairs from DB
 		Account account = db.findAccountByUsernameAndPassword(username, password);
 		
 		// NOTE: this is a simple test to check if no results were found in the DB
-		if (accounts.equals(null)) {
-			System.out.println("No Account found in Battlemonz with Username <" + username + ">");
-			fail("No Account with Password <" + password + "> returned from Battlemonz DB");
+		if (account != null ) {
+			System.out.println(account.getAccountId() + "," + account.getUsername()+ ", " + account.getPassword()+ "," +
+					account.getCard1() + "," + account.getCard2()+ "," + account.getCard3());
 		}
 		// NOTE: assembling the results into Author and Book lists so that they could be
 		//       inspected for correct content - well-formed objects with correct content
 		else {			
-			accounts = new ArrayList<Account>();
-			
-				accounts.add(account);
-				System.out.println(account.getAccountId() + "," + account.getUsername()+ ", " + account.getPassword()+ "," +
-				account.getCard1() + "," + account.getCard2()+ "," + account.getCard3());
+//			accounts = new ArrayList<Account>();
+//				accounts.add(account);
+				
+				System.out.println("No Account found in Battlemonz with Username <" + username + ">");
+				fail("No Account with Password <" + password + "> returned from Battlemonz DB");
 				
 
 		}
 	}
+
+
+
+	
+	
+	@Test
+	public void TestInsertNewAccountByUsernameAndPassword() { //String username, String password
+		System.out.println("\n*** Testing InsertNewAccountByUsernameAndPassword ***");
+		
+		String username = "test";
+		String password = "admin";
+		
+		Integer account_id = db.insertNewAccountByUsernameAndPassword(username, password);
+		
+		if(account_id > 0) {
+			
+			Account account = db.findAccountByUsernameAndPassword(username, password);
+			
+			if(account == null) {
+				System.out.println("No Account found for username <" + username + ">");
+				fail("Failed to insert new Account <" + username + " " + password +   "> into Account database");				
+			}
+			else {
+				System.out.println("New Account (ID: " + account_id + ") successfully added to Account table: <" + username + ">");
+				 account = db.removeAccountByUsernameAndPassword(username, password);
+				
+				 
+				
+			}
+			
+		}
+		else {
+			System.out.println("Failed to insert new Account (ID: " + account_id + ") into Accounts table: <" + username + ">");
+			fail("Failed to insert new Account <" + username + "> into Account DB");
+			
+			
+		}
+	}
+	
+
+	
+
+	
+	@Test
+	public void testSaveDeckToUserByName() { //String username, String cardname1, String cardname2, String cardname3
+		System.out.println("\n*** Testing saveDeckToUserByName ***");
+		
+		String cardname1 = "Vader";
+		String cardname2 = "Vixon";
+		String cardname3 = "Smokedux";
+		String username = "admin";
+		
+		Integer  account_id = db.saveDeckToUserByName(username, cardname1, cardname2, cardname3);
+	
+		if(account_id > 0) {
+			Account account = db.findAccountByUsername(username);
+			
+			if(account == null) {
+				System.out.println("No Decks found for username <" + username + ">");
+				fail("Failed to insert new deck <" + cardname1 + " " + cardname2 + " " + cardname3 + " " +  "> into Username database");
+					
+			}
+			else {
+				System.out.println("New Deck (ID: " + account_id + ") successfully added to Username: <" + username + ">");
+				
+				// now delete Book (and its Author) from DB
+				// leaving the DB in its previous state - except that an author_id, and a book_id have been used
+				
+				Deck deck = db.removeDeckToUserByName(username, cardname1, cardname2, cardname3);
+				
+			}
+		}
+		else {
+			System.out.println("Failed to save a deck into User: <" + username + ">");
+			fail("Failed to insert new Cards <" + cardname1 + " " + cardname2 + " " + cardname3 + " " +  "> into Username database");
+		}
+		
+	}
+	
+	@Test
+	public void testRemoveAccountByUsernameAndPassword() {//String username, String password
+		// TODO Auto-generated method stub
+	}
+
+	@Test
+	public void testRemoveDeckToUserByName() { //String username, String cardname1, String cardname2, String cardname3
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Test
+	public void selectRandomCards() {
+		// TODO Auto-generated method stub ; Checking by using recursive function calling itself ~3 times
+
+		
+	}
+	
 
 
 }
