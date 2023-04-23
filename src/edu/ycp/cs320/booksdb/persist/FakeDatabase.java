@@ -42,10 +42,10 @@ public class FakeDatabase implements IDatabase {
 	
 
 	@Override
-	public Card findCardByCardId(int cardId) {
+	public Card findCardByCardID(int cardID) {
 		Card theCard  = new Card();
 		for(Card cards: cardList ) {
-			if(cards.getID() == cardId ) {
+			if(cards.getID() == cardID ) {
 				theCard = cards;
 				
 			}
@@ -55,25 +55,30 @@ public class FakeDatabase implements IDatabase {
 
 	@Override
 	public Account findAccountByUsernameAndPassword(String username, String password) {
-		Account account =  new Account();
+		Account result = new Account();
 		for(Account accounts: accountList ) {
 			if(accounts.getUsername().equals(username)&& accounts.getPassword().equalsIgnoreCase(password) ) {
-				account = accounts;
+				result = accounts;
+				
 			}
 		}
-		return account;
+		
+		return result;
 	}
 	
 
 	@Override
-	public void insertNewAccountByUsernameAndPassword(String username, String password) {
+	public Integer insertNewAccountByUsernameAndPassword(String username, String password) {
+				Integer ID; 
 				Account account = new Account();
 				account.setPassword(password);
 				account.setUsername(username);
 				account.setAccountId(accountList.size());
 				accountList.add(account);
-			
-		
+				ID = account.getAccountId();
+				
+				
+				return ID;
 	}
 
 	@Override
@@ -117,23 +122,6 @@ public class FakeDatabase implements IDatabase {
 		return ranDeck;	
 			
 		}
-		
-	
-
-
-
-	@Override
-	public void insertDeckIntoUser(String username, Deck deck) {
-		Account account = new Account();
-		for (Account accounts: accountList) {
-			if(account.getUsername().equals(username)) {
-				accounts.addDeck(deck);
-			}
-			
-		
-		}
-		
-	}
 
 	@Override
 	public Card findCardByName(String cardName) {
@@ -148,11 +136,19 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public void saveDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
+	public Integer saveDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
 		Deck deck = new Deck();
-		Account account = findAccountByUsername(username);
+		int authorID = -1;
 		
-	
+		for(Account account: accountList) {
+			if(account.getUsername().equals(username)) {
+				
+				authorID = account.getAccountId();
+				
+			}
+		
+		}
+		
 		for (Card card: cardList) {
 			if(card.getName().equals(cardname1)) {
 				deck.addCard(card);
@@ -166,7 +162,8 @@ public class FakeDatabase implements IDatabase {
 				
 				
 			}
-		account.addDeck(deck);
+		
+		return authorID;
 		}
 
 	@Override
@@ -180,5 +177,24 @@ public class FakeDatabase implements IDatabase {
 		
 		return result;
 	}
+	
+	//not implemented in FakeDB
+	@Override
+	public Deck removeDeckToUserByName(String username,String cardname1,String cardname2,String cardname3) {
+		Deck deck = new Deck();
+		
+		return deck;
+	}
+	
+	//not implemented in FakeDB
+	@Override
+	public Account removeAccountByUsernameAndPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+	
 	}
 

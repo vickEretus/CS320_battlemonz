@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import edu.ycp.cs320.battlemonsterz.model.Deck;
+import edu.ycp.cs320.booksdb.persist.DatabaseProvider;
+import edu.ycp.cs320.booksdb.persist.IDatabase;
 import edu.ycp.cs320.battlemonsterz.model.Card;
 import edu.ycp.cs320.battlemonsterz.model.Account;
 import java.util.Random;
-import edu.ycp.cs320.booksdb.persist.DatabaseProvider;
-import edu.ycp.cs320.booksdb.persist.IDatabase;
 
 public class AllCardsQuery {
 	public static void main(String[] args) throws Exception {

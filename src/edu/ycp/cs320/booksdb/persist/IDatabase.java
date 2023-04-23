@@ -15,9 +15,11 @@ public interface IDatabase {
 	
 	public List<Account> findallAccounts();
 	
-	public Card findCardByCardId(int cardId);
+	public Card findCardByCardID(int cardID);
 	
 	public Card findCardByName(String cardName);
+	
+
 	
 	public Account findAccountByUsernameAndPassword(String username, String password);
 	
@@ -25,9 +27,12 @@ public interface IDatabase {
 	
 	public Deck selectRandomCards();
 	
-	public void insertNewAccountByUsernameAndPassword(String username, String password);
+	public Integer insertNewAccountByUsernameAndPassword(String username, String password);
 	
-	public void insertDeckIntoUser(String username, Deck deck);
+	public Account removeAccountByUsernameAndPassword(String username, String password); 
 	
-	public void saveDeckToUserByName(String username,String cardname1,String cardname2,String cardname3);
+	
+	public Integer saveDeckToUserByName(String username,String cardname1,String cardname2,String cardname3);
+	
+	public Deck removeDeckToUserByName(String username,String cardname1,String cardname2,String cardname3);
 }
