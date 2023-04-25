@@ -1,8 +1,6 @@
 
 package edu.ycp.cs320.battlemonsterz.servlet;
 
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,10 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-import edu.ycp.cs320.battlemonsterz.model.Card;
-import edu.ycp.cs320.battlemonsterz.model.Deck;
 import edu.ycp.cs320.battlemonsterz.controller.FindAccountByUsernameController;
+import edu.ycp.cs320.battlemonsterz.controller.RemoveDeckToUserController;
 import edu.ycp.cs320.battlemonsterz.controller.SaveDeckToUserController;
 import edu.ycp.cs320.battlemonsterz.model.Account;
 
@@ -51,30 +47,29 @@ public class CardDatabaseServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	        throws ServletException, IOException {
-	    
+		
+		 
 	    System.out.println("CardDatabase Servlet: doPost");
-
+	    
 	    if (req.getParameter("back") != null) {
-	    	  
-	    	//resp.sendRedirect(req.getContextPath() + "/index.jsp");
-	    	req.getRequestDispatcher("/_view/index.jsp").forward(req,resp);
-	    	
-	    	//return;
+	    	req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+	    	return;
 	    	}
 	    
-	    /* CHECK HTTP SESSION FOR USER AND IF THEY HAVE SAVED CARDS
-	     * IF CARD_NAME1, 2, AND 3 ARE NULL, CHOSEN CARDS WILL BE EMPTY
-	     IF FILLED, DISPLAY CARDS
-	     * 
-	     */
-	    
+		
+		
 		String user = (String) req.getSession().getAttribute("user");
+		
+		RemoveDeckToUserController removecontroller = new RemoveDeckToUserController();
+		
+		FindAccountByUsernameController controller = new FindAccountByUsernameController();
+
 	    
 	    String[] selectedCardNames = new String[3];
-	    
-	    FindAccountByUsernameController controller = new FindAccountByUsernameController();
+	  
 	  
 	    Account account = controller.getAccountByUsername(user);
+		
 	    
 	    if (account.getCard1() == null || account.getCard2() == null || account.getCard3() == null) {
 	    	selectedCardNames =  req.getParameterValues("card");
@@ -89,10 +84,17 @@ public class CardDatabaseServlet extends HttpServlet {
 	    SaveDeckToUserController savecontroller = new  SaveDeckToUserController();
 	    
 	    savecontroller.saveDecktoUser(user, selectedCardNames[0], selectedCardNames[1], selectedCardNames[2]);
+		
+
 	   
-	    /* DATABASE METHODS TO RETREIVE THE CARDS IN THE LIST BASED ON THE NAME
-	     SAVE THE CARDS TO THE HTTP SESSION USER WHEN THEY SUBMIT THE FORM
-	     */
+
+	    if (req.getParameter("remove") != null) {
+	    	removecontroller.removeDeckFromUser(user, selectedCardNames[0], selectedCardNames[1], selectedCardNames[2]);
+	    	return;
+	    	}
+	    
+	  
+	  
 	    // set the request attribute for the selected card names
 	    req.setAttribute("selectedCardNames", selectedCardNames);
 	   
