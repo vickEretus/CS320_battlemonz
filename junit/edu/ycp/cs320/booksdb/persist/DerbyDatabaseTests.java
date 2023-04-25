@@ -243,7 +243,9 @@ public class DerbyDatabaseTests {
 				// now delete Book (and its Author) from DB
 				// leaving the DB in its previous state - except that an author_id, and a book_id have been used
 				
-				Deck deck = db.removeDeckToUserByName(username, cardname1, cardname2, cardname3);
+				account_id = db.removeDeckToUserByName(username);
+				//Deck deck = db.removeDeckToUserByName(account.getUsername(), account.getCard1(), account.getCard2(), account.getCard3());
+				System.out.println("New Deck (ID: " + account_id + ") successfully removed from Username: <" + username + ">");
 				
 			}
 		}
@@ -266,9 +268,24 @@ public class DerbyDatabaseTests {
 	}
 	
 	@Test
-	public void selectRandomCards() {
-		// TODO Auto-generated method stub ; Checking by using recursive function calling itself ~3 times
-
+	public void testselectRandomCards() {
+		// Checking by using recursive function calling itself ~3 times
+		System.out.println("\n*** Testing selectRandomCards *** \n");
+		for(int i = 0 ; i <= 5 ; i++) {
+			Deck deck= db.selectRandomCards();
+			System.out.println("\n * New RandomCards *");
+			System.out.println(deck.getCard(0).getID() +", " + deck.getCard(0).getName() + ", " + deck.getCard(0).getType()+ ", " 
+					+ deck.getCard(0).getHealth()+ ", " + deck.getCard(0).getAttackRating()+ ", " + deck.getCard(0).getDefenseRating()); 
+			
+			System.out.println(deck.getCard(1).getID() +", " + deck.getCard(1).getName() + ", " + deck.getCard(1).getType()+ ", " 
+					+ deck.getCard(1).getHealth()+ ", " + deck.getCard(1).getAttackRating()+ ", " + deck.getCard(1).getDefenseRating()); 
+			
+			System.out.println(deck.getCard(2).getID() +", " + deck.getCard(2).getName() + ", " + deck.getCard(2).getType()+ ", " 
+					+ deck.getCard(2).getHealth()+ ", " + deck.getCard(2).getAttackRating()+ ", " + deck.getCard(2).getDefenseRating()); 
+			
+			
+		}
+		
 		
 	}
 	
