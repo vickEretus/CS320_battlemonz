@@ -1,6 +1,7 @@
 package edu.ycp.cs320.booksdb.persist;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -598,7 +599,7 @@ public class DerbyDatabase implements IDatabase {
 	                stmt = conn.prepareStatement(
 	                        "SELECT accounts.* " +
 	                        "FROM accounts " +
-	                        "WHERE accounts.username = ?"
+	                        "WHERE username = ?"
 	                );
 	                
 	                stmt.setString(1, username);
@@ -719,20 +720,164 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public Account removeAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<Account>() {
+			@Override
+			public Account execute(Connection conn) throws SQLException {
+				
+				PreparedStatement stmt3 = null;
+				
+				try {
+					Account account= findAccountByUsernameAndPassword(username, password);
+					
+					int accountID = account.getAccountId();
+					// first delete entries in BookAuthors junction table
+					// can't delete entries in Books or Authors tables while they have foreign keys in junction table
+					// prepare to delete the junction table entries (bookAuthors)
+					stmt3 = conn.prepareStatement(
+							"delete from accounts " +
+							"  where account_id = ? "
+					);
+					
+					// delete the junction table entries from the DB for this title
+					// this works if there are not multiple books with the same name
+					stmt3.setInt(1, accountID);
+					stmt3.executeUpdate();
+					
+					System.out.println("Deleted junction table entries for Account(s) <" + accountID +", " + username + "> from DB");									
+				
+						
+	
+					return account;
+				} finally {
+					DBUtil.closeQuietly(stmt3);								
+				}
+			}
+		});
 	}
 
 	@Override
-	public Deck removeDeckToUserByName(String username, String cardname1, String cardname2, String cardname3) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Integer removeDeckToUserByName(String username) {
+		return executeTransaction(new Transaction<Integer>() {
+			@Override
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				
+				
+				ResultSet resultSet1 = null;
+				ResultSet resultSet3 = null;
+				
+				// for saving author ID and book ID
+				Integer account_id = -1;
+				String cardname1 = "NULL";
+				String cardname2 = "NULL";
+				String cardname3 = "NULL";
+				
 
+				// try to retrieve author_id (if it exists) from DB, for Author's full name, passed into query
+				try {
+					stmt1 = conn.prepareStatement(
+							"select accounts.* from accounts " +
+							"  where username = ? "
+					);
+					stmt1.setString(1, username);
+					
+					// execute the query, get the result
+					resultSet1 = stmt1.executeQuery();
+
+					
+					// if Author was found then save author_id					
+					if (resultSet1.next())
+					{
+						account_id = resultSet1.getInt(1);
+						System.out.println("Account <" + username + "> found with ID: " + account_id);						
+					
+							// prepare SQL insert statement to add Author to Authors table
+							stmt2 = conn.prepareStatement(
+									"update accounts "
+									+ "set card_1 = ?, card_2 = ? , card_3 = ?"
+									+ "WHERE account_id = ?" 
+							);
+							stmt2.setString(1, cardname1);
+							stmt2.setString(2, cardname2);
+							stmt2.setString(3, cardname3);
+							stmt2.setInt(4, account_id);
+							
+							// execute the update
+							stmt2.executeUpdate();
+							
+							//System.out.println("New Cards <" + cardname1 + ", " + cardname2 + " , " + cardname3 + "> inserted in Account: <" + username + ">  ");						
+						
+							// try to retrieve author_id for new Author - DB auto-generates author_id
+							stmt3 = conn.prepareStatement(
+									"select account_id from accounts " +
+									"  where username = ?  "
+							);
+							stmt3.setString(1, username);
+							
+							// execute the query							
+							resultSet3 = stmt3.executeQuery();
+							
+							// get the result - there had better be one							
+							if (resultSet3.next())
+							{
+								account_id = resultSet3.getInt(1);
+								System.out.println("Cards removed from ID:"  + account_id +" <" + cardname1 + " , " + cardname2 + " , " + cardname3 + ">" );						
+							}
+							else	// really should throw an exception here - the new author should have been inserted, but we didn't find them
+							{
+								System.out.println("New Cards <" + cardname1 + ", " + cardname2 + " , " + cardname3 + "> not found in Account (ID: " + account_id);
+							}
+						}
+					
+					else {
+					System.out.println("Account <" + username + "> not found");
+					}
+
+					return account_id;
+				} finally {
+					DBUtil.closeQuietly(resultSet1);
+					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);					
+					DBUtil.closeQuietly(resultSet3);
+					DBUtil.closeQuietly(stmt3);					
+				
+				}
+			}
+		});
+	}
+	
+	
 	@Override
 	public Deck selectRandomCards() {
-		// TODO Auto-generated method stub
-		return null;
+		Deck newDeck = new Deck();
+		
+		//Creates a pseudorandom random number the first time 
+		Random rand = new Random();
+		int randInt =  rand.nextInt(15)+1;	
+		int[] array = new int[3] ;
+		for (int i = 0; i <= 2; i++) {
+			array[i] = randInt;
+			//Creates a pseudorandom random number for a new seed so that a different number is created
+			rand = new Random();
+			randInt = rand.nextInt(15)+1;	
+			
+			}
+		
+	Card card1 = findCardByCardID(array[0]);
+	Card card2 = findCardByCardID(array[1]);
+	Card card3 = findCardByCardID(array[2]);
+		
+	newDeck.addCard(card1);	
+	newDeck.addCard(card2);
+	newDeck.addCard(card3);
+		
+		
+	return newDeck;
+		
+		
+		
 	}
 
 

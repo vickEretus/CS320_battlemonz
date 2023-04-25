@@ -113,6 +113,7 @@ public class FakeDatabase implements IDatabase {
 		for (Card card: cardList) {
 			if(card.getID() == randInt && amount < 2) {
 			ranDeck.addCard(card);
+			rand = new Random();
 			randInt = rand.nextInt(15);	
 			amount++;
 			}
@@ -180,16 +181,15 @@ public class FakeDatabase implements IDatabase {
 	
 	//not implemented in FakeDB
 	@Override
-	public Deck removeDeckToUserByName(String username,String cardname1,String cardname2,String cardname3) {
-		Deck deck = new Deck();
+	public Integer removeDeckToUserByName(String username) {
+		int account_id = -1;
 		
-		return deck;
+		return account_id ;
 	}
 	
 	//not implemented in FakeDB
 	@Override
 	public Account removeAccountByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

@@ -36,5 +36,5 @@ public interface IDatabase {
 	public Integer saveDeckToUserByName(String username,String cardname1,String cardname2,String cardname3);
 
 	
-	public Deck removeDeckToUserByName(String username,String cardname1,String cardname2,String cardname3);
+	public Integer removeDeckToUserByName(String username);
 }
