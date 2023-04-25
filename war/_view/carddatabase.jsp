@@ -15,16 +15,8 @@
 		}
 		
 		input{
-	
-		
-		background-color:OrangeRed;
-		width: 100px;
-		height:30px;
-		border-radius:20px;
-		margin-left:0px;
-    	display: block;
+		background-color:orangeRed;
 		}
-		
 		
 		img{
 		height:133px;
@@ -124,6 +116,8 @@
   <input type="hidden" name="back" value="true">
   <input type="submit" value="Back">
 </form>
+	
+	
 	
 
 		
@@ -331,7 +325,10 @@
   </ul>
    			 </div>
 
-
+		<form action="${pageContext.servletContext.contextPath}/carddatabase" method="post">
+  		<input type="hidden" name="remove" value="true">
+  		<input type="submit" value="remove">
+		</form>
 			
 			</div>	
 			
