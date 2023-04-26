@@ -256,16 +256,16 @@ public class DerbyDatabaseTests {
 		
 	}
 	
-	@Test
-	public void testRemoveAccountByUsernameAndPassword() {//String username, String password
-		// TODO Auto-generated method stub
-	}
-
-	@Test
-	public void testRemoveDeckToUserByName() { //String username, String cardname1, String cardname2, String cardname3
-		// TODO Auto-generated method stub
-
-	}
+//	@Test
+//	public void testRemoveAccountByUsernameAndPassword() {//String username, String password
+//		// TODO Auto-generated method stub
+//	}
+//
+//	@Test
+//	public void testRemoveDeckToUserByName() { //String username, String cardname1, String cardname2, String cardname3
+//		// TODO Auto-generated method stub
+//
+//	}
 	
 	@Test
 	public void testselectRandomCards() {

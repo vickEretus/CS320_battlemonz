@@ -49,6 +49,7 @@ public class AccountServlet extends HttpServlet {
         if (req.getParameter("back") != null) {
             // call index JSP
             req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+            return;
         }
         
         if (req.getParameter("logout") != null) {
