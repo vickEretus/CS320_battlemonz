@@ -16,10 +16,10 @@ public class RemoveDeckToUserController {
 		db = DatabaseProvider.getInstance();		
 	}
 
-	public void removeDeckFromUser(String username, String cardname1, String cardname2, String cardname3) {
+	public void removeDeckFromUser(String username) {
 		
 		// save card names to user
-		db.removeDeckToUserByName(username, cardname1, cardname2, cardname3);
+		db.removeDeckToUserByName(username);
 		
 		
 		

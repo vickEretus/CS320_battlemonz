@@ -71,7 +71,13 @@ public class CardDatabaseServlet extends HttpServlet {
 	    Account account = controller.getAccountByUsername(user);
 		
 	    
-	    if (account.getCard1() == null || account.getCard2() == null || account.getCard3() == null) {
+	    	if (account.getCard1()== null || account.getCard1().equals("") ||
+	    	    account.getCard2()== null || account.getCard2().equals("") ||
+	    	    account.getCard3()== null || account.getCard3().equals("")) {	
+	    	
+	    	
+	    	
+	    	
 	    	selectedCardNames =  req.getParameterValues("card");
 	    }
 	    
@@ -89,8 +95,7 @@ public class CardDatabaseServlet extends HttpServlet {
 	   
 
 	    if (req.getParameter("remove") != null) {
-	    	removecontroller.removeDeckFromUser(user, selectedCardNames[0], selectedCardNames[1], selectedCardNames[2]);
-	    	return;
+	    	removecontroller.removeDeckFromUser(user);
 	    	}
 	    
 	  

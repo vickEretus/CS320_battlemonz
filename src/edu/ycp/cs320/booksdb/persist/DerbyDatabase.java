@@ -770,9 +770,9 @@ public class DerbyDatabase implements IDatabase {
 				
 				// for saving author ID and book ID
 				Integer account_id = -1;
-				String cardname1 = "NULL";
-				String cardname2 = "NULL";
-				String cardname3 = "NULL";
+				String cardname1 = "";
+				String cardname2 = "";
+				String cardname3 = "";
 				
 
 				// try to retrieve author_id (if it exists) from DB, for Author's full name, passed into query
@@ -796,7 +796,7 @@ public class DerbyDatabase implements IDatabase {
 							// prepare SQL insert statement to add Author to Authors table
 							stmt2 = conn.prepareStatement(
 									"update accounts "
-									+ "set card_1 = ?, card_2 = ? , card_3 = ?"
+									+ "set card_1 = ?, card_2 = ?, card_3 = ?"
 									+ "WHERE account_id = ?" 
 							);
 							stmt2.setString(1, cardname1);
