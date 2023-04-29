@@ -41,11 +41,10 @@
 		<h1>Welcome</h1>
 			</div>
 			<div>
-			<!--  <input name = "about" type = "submit" value = "About Game"> -->
-			<input name = "account" type = "submit" value = "Account">
 			<input name = "carddatabase" type = "submit" value = "Card Database">
+			<input name = "account" type = "submit" value = "Account">
 			<input name = "play" type = "submit" value = "Play"> 
-
+			
 			</div>
 		
 	

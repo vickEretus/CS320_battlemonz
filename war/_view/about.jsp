@@ -4,7 +4,7 @@
 
 <html>
 	<head>
-		<title>Account</title>
+		<title>About</title>
 		<style type="text/css">
 		body{
 		background-color:black;
@@ -16,6 +16,17 @@
 		height:50px;
 		}
 		
+		h1{
+	
+		color:OrangeRed;
+		font-size:100px;
+		text-align:center;
+		}
+		
+		h2{
+		color:OrangeRed;
+		font-size:50px;
+		}
 		#info{
 
 		
@@ -61,24 +72,15 @@
 	
 		<form action="${pageContext.servletContext.contextPath}/account" method="post">
 			<div id = "title">
-			<h1>Account Information</h1>
+			<h1>About the Game</h1>
 			</div>
 			
 			<div id = "info">
-			<h1>
-			Username: ${account.username}
-			</h1>
-			<h1>
-			Card 1: ${account.card1}
-			</h1>
-			<h1>
-			Card 2: ${account.card2}
-			</h1>
-			<h1>
-			Card 3: ${account.card3}
-			</h1>
-
 			
+
+			<p>
+			Battle
+			</p>
 			
 			
 		
@@ -93,7 +95,7 @@
 			
 
 			
-			<input type="Submit" name="logout" value="Logout">
+			
 			
 			</div>
 		</form>
