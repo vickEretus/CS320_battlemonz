@@ -51,10 +51,10 @@ public class IndexServlet extends HttpServlet {
 	            req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	        }
 	        
-	        //else if (req.getParameter("about") != null) {
+	        else if (req.getParameter("about") != null) {
 	            // call addNumbers JSP
-	        //    req.getRequestDispatcher("/_view/about.jsp").forward(req, resp);
-	        //}
+	            req.getRequestDispatcher("/_view/about.jsp").forward(req, resp);
+	        }
 	        
 	        else if (req.getParameter("carddatabase") != null) {
 	            // call addNumbers JSP
