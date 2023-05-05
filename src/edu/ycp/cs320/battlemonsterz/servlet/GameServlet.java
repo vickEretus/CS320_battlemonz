@@ -77,7 +77,7 @@ public class GameServlet extends HttpServlet {
 		deck_one.addCard(d1_card_three);
 		
 		
-		
+		deck_one = selectcontroller.getRandomCards();
 		deck_two = selectcontroller.getRandomCards();
 	
 		
@@ -90,7 +90,8 @@ public class GameServlet extends HttpServlet {
 	    req.getSession().setAttribute("deck_two_health", model.getDeckTwo().getTeamHealth());
 	   
 	    
-	    req.getSession().setAttribute("d1c1name", model.getDeckOne().getCard(0).getName());
+	   
+		req.getSession().setAttribute("d1c1name", model.getDeckOne().getCard(0).getName());
 	    req.getSession().setAttribute("d1c2name", model.getDeckOne().getCard(1).getName());
 	    req.getSession().setAttribute("d1c3name", model.getDeckOne().getCard(2).getName());
 	    req.getSession().setAttribute("d2c1name", model.getDeckTwo().getCard(0).getName());
