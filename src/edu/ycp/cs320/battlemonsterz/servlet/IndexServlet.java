@@ -43,12 +43,12 @@ public class IndexServlet extends HttpServlet {
 	        // check which button the user pressed
 	        if (req.getParameter("account") != null) {
 	            // call addNumbers JSP
-	            req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
+	        	resp.sendRedirect(req.getContextPath() + "/account");
 	        }
 	        
 	        else if (req.getParameter("play") != null) {
 	            // call addNumbers JSP
-	            req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
+	        	resp.sendRedirect(req.getContextPath() + "/game");
 	        }
 	        
 	        else if (req.getParameter("about") != null) {
@@ -58,7 +58,7 @@ public class IndexServlet extends HttpServlet {
 	        
 	        else if (req.getParameter("carddatabase") != null) {
 	            // call addNumbers JSP
-	            req.getRequestDispatcher("/_view/carddatabase.jsp").forward(req, resp);
+	        	resp.sendRedirect(req.getContextPath() + "/carddatabase");
 	        }
 
 	        

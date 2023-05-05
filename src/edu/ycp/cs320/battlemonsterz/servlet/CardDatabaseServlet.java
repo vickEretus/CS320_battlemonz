@@ -52,7 +52,7 @@ public class CardDatabaseServlet extends HttpServlet {
 	    System.out.println("CardDatabase Servlet: doPost");
 	    
 	    if (req.getParameter("back") != null) {
-	    	req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+	    	resp.sendRedirect(req.getContextPath() + "/index");
 	    	return;
 	    	}
 	    
