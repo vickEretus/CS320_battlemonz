@@ -142,7 +142,7 @@
 			
 			<td>GRASS</td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/vader.jpeg" onclick="showCardStats('vader-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Vader.jpeg" onclick="showCardStats('vader-stats',this)">
 			<div id="vader-stats" style="display: none;" onclick="hideCardStats('vader-stats', this)">
         		 <p>HP: 90</p>
         		 <p>Attack: 66</p>
@@ -152,7 +152,7 @@
     		<input  type="checkbox" name="card" value="vader" value="Choose Card">
 			</td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/vixon.jpeg" onclick="showCardStats('vixon-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Vixon.jpeg" onclick="showCardStats('vixon-stats',this)">
 			<div id="vixon-stats" style="display: none;" onclick="hideCardStats('vixon-stats', this)">
         		 <p>HP: 82</p>
         		 <p>Attack: 73</p>
@@ -161,7 +161,7 @@
     		</div>
     		<input type="checkbox" name="card" value="vixon" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/smokedux.jpeg" onclick="showCardStats('smokedux-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Smokedux.jpeg" onclick="showCardStats('smokedux-stats',this)">
 			<div id="smokedux-stats" style="display: none;" onclick="hideCardStats('smokedux-stats', this)">
         		 <p>HP: 95</p>
         		 <p>Attack: 70</p>
@@ -170,7 +170,7 @@
     		</div>
     		<input type="checkbox" name="card" value="smokedux" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/zeus.jpeg"onclick="showCardStats('zeus-stats',this)" >
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Zeus.jpeg"onclick="showCardStats('zeus-stats',this)" >
 			<div id="zeus-stats" style="display: none;" onclick="hideCardStats('zeus-stats', this)">
         		 <p>HP: 82</p>
         		 <p>Attack: 76</p>
@@ -179,7 +179,7 @@
     		</div>
     		<input type="checkbox" name="card" value="zeus" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/heathen.jpeg" onclick="showCardStats('heathen-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Heathen.jpeg" onclick="showCardStats('heathen-stats',this)">
 			<div id="heathen-stats" style="display: none;" onclick="hideCardStats('heathen-stats', this)">
         		 <p>HP: 92</p>
         		 <p>Attack: 70</p>
@@ -194,7 +194,7 @@
 			<tr>
 			<td>FIRE</td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/trance.jpeg" onclick="showCardStats('trance-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Trance.jpeg" onclick="showCardStats('trance-stats',this)">
 			<div id="trance-stats" style="display: none;" onclick="hideCardStats('trance-stats', this)">
         		 <p>HP: 94</p>
         		 <p>Attack: 57</p>
@@ -203,7 +203,7 @@
     		</div>
     		<input type="checkbox" name="card" value="trance" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/nethertalon.jpeg" onclick="showCardStats('nethertalon-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Nethertalon.jpeg" onclick="showCardStats('nethertalon-stats',this)">
 			<div id="nethertalon-stats" style="display: none;" onclick="hideCardStats('nethertalon-stats', this)">
         		 <p>HP: 89</p>
         		 <p>Attack: 71</p>
@@ -212,7 +212,7 @@
     		</div>
     		<input  type="checkbox" name="card" value="nethertalon" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/firebreather.jpeg" onclick="showCardStats('firebreather-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Firebreather.jpeg" onclick="showCardStats('firebreather-stats',this)">
 			<div id="firebreather-stats" style="display: none;" onclick="hideCardStats('firebreather-stats', this)">
         		 <p>HP: 88</p>
         		 <p>Attack: 75</p>
@@ -221,7 +221,7 @@
     		</div>
     		<input  type="checkbox" name="card" value="firebreather" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/glowzee.jpeg" onclick="showCardStats('glowzee-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Glowzee.jpeg" onclick="showCardStats('glowzee-stats',this)">
 			<div id="glowzee-stats" style="display: none;" onclick="hideCardStats('glowzee-stats', this)">
         		 <p>HP: 87</p>
         		 <p>Attack: 65</p>
@@ -230,7 +230,7 @@
     		</div>
     		<input type="checkbox" name="card" value="glowzee" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/brightsoul.jpeg" onclick="showCardStats('brightsoul-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Brightsoul.jpeg" onclick="showCardStats('brightsoul-stats',this)">
 			<div id="brightsoul-stats" style="display: none;" onclick="hideCardStats('brightsoul-stats', this)">
         		 <p>HP: 81</p>
         		 <p>Attack: 80</p>
@@ -245,7 +245,7 @@
 			<tr>
 			<td>WATER</td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/coolwind.jpeg" onclick="showCardStats('coolwind-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Coolwind.jpeg" onclick="showCardStats('coolwind-stats',this)">
 			<div id="coolwind-stats" style="display: none;" onclick="hideCardStats('coolwind-stats', this)">
         		 <p>HP: 84</p>
         		 <p>Attack: 67</p>
@@ -255,7 +255,7 @@
 			<input type="checkbox" name="card" value="coolwind" value="Choose Card"></td>
 			
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/splashfist.jpeg" onclick="showCardStats('splashfist-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Splashfist.jpeg" onclick="showCardStats('splashfist-stats',this)">
 			<div id="splashfist-stats" style="display: none;" onclick="hideCardStats('splashfist-stats', this)">
         		 <p>HP: 86</p>
         		 <p>Attack: 67</p>
@@ -264,7 +264,7 @@
     		</div>
     		<input  type="checkbox" name="card" value="splashfist" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/searvoid.jpeg" onclick="showCardStats('searvoid-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Searvoid.jpeg" onclick="showCardStats('searvoid-stats',this)">
 			<div id="searvoid-stats" style="display: none;" onclick="hideCardStats('searvoid-stats', this)">
         		 <p>HP: 93</p>
         		 <p>Attack: 69</p>
@@ -273,7 +273,7 @@
     		</div>
     		<input  type="checkbox" name="card" value="searvoid" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/braveface.jpeg" onclick="showCardStats('braveface-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Braveface.jpeg" onclick="showCardStats('braveface-stats',this)">
 			<div id="braveface-stats" style="display: none;" onclick="hideCardStats('braveface-stats', this)">
         		 <p>HP: 96</p>
         		 <p>Attack: 70</p>
@@ -282,7 +282,7 @@
     		</div>
     		<input type="checkbox" name="card" value="braveface" value="Choose Card"></td>
 			
-			<td><img class ="card" src="<%=request.getContextPath()%>/Images/poseidon.jpeg" onclick="showCardStats('poseidon-stats',this)">
+			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Poseidon.jpeg" onclick="showCardStats('poseidon-stats',this)">
 			<div id="poseidon-stats" style="display: none;" onclick="hideCardStats('poseidon-stats', this)">
         		 <p>HP: 93</p>
         		 <p>Attack: 67</p>
