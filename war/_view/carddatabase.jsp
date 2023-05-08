@@ -149,7 +149,7 @@
     			<p>Defense: 94</p>
     		
     		</div>
-    		<input  type="checkbox" name="card" value="vader" value="Choose Card">
+    		<input  type="checkbox" name="card" value="Vader" value="Choose Card">
 			</td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Vixon.jpeg" onclick="showCardStats('vixon-stats',this)">
@@ -159,7 +159,7 @@
     			<p>Defense: 95</p>
     		
     		</div>
-    		<input type="checkbox" name="card" value="vixon" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Vixon" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Smokedux.jpeg" onclick="showCardStats('smokedux-stats',this)">
 			<div id="smokedux-stats" style="display: none;" onclick="hideCardStats('smokedux-stats', this)">
@@ -168,7 +168,7 @@
     			<p>Defense: 85</p>
     		
     		</div>
-    		<input type="checkbox" name="card" value="smokedux" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Smokedux" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Zeus.jpeg"onclick="showCardStats('zeus-stats',this)" >
 			<div id="zeus-stats" style="display: none;" onclick="hideCardStats('zeus-stats', this)">
@@ -177,7 +177,7 @@
     			<p>Defense: 92</p>
     		
     		</div>
-    		<input type="checkbox" name="card" value="zeus" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Zeus" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Heathen.jpeg" onclick="showCardStats('heathen-stats',this)">
 			<div id="heathen-stats" style="display: none;" onclick="hideCardStats('heathen-stats', this)">
@@ -186,7 +186,7 @@
     			<p>Defense: 88</p>
     	
     		</div>
-    		<input type="checkbox" name="card" value="heathen" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Heathen" value="Choose Card"></td>
 			</tr>
 			
 			
@@ -201,7 +201,7 @@
     			<p>Defense: 99</p>
     	
     		</div>
-    		<input type="checkbox" name="card" value="trance" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Trance" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Nethertalon.jpeg" onclick="showCardStats('nethertalon-stats',this)">
 			<div id="nethertalon-stats" style="display: none;" onclick="hideCardStats('nethertalon-stats', this)">
@@ -210,7 +210,7 @@
     			<p>Defense: 90</p>
     	
     		</div>
-    		<input  type="checkbox" name="card" value="nethertalon" value="Choose Card"></td>
+    		<input  type="checkbox" name="card" value="Nethertalon" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Firebreather.jpeg" onclick="showCardStats('firebreather-stats',this)">
 			<div id="firebreather-stats" style="display: none;" onclick="hideCardStats('firebreather-stats', this)">
@@ -219,7 +219,7 @@
     			<p>Defense: 87</p>
     		
     		</div>
-    		<input  type="checkbox" name="card" value="firebreather" value="Choose Card"></td>
+    		<input  type="checkbox" name="card" value="Firebreather" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Glowzee.jpeg" onclick="showCardStats('glowzee-stats',this)">
 			<div id="glowzee-stats" style="display: none;" onclick="hideCardStats('glowzee-stats', this)">
@@ -228,7 +228,7 @@
     			<p>Defense: 98</p>
     	
     		</div>
-    		<input type="checkbox" name="card" value="glowzee" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Glowzee" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Brightsoul.jpeg" onclick="showCardStats('brightsoul-stats',this)">
 			<div id="brightsoul-stats" style="display: none;" onclick="hideCardStats('brightsoul-stats', this)">
@@ -237,7 +237,7 @@
     			<p>Defense: 89</p>
     	
     		</div>
-    		<input type="checkbox" name="card" value="brightsoul" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Brightsoul" value="Choose Card"></td>
 			</tr>
 			
 			
@@ -252,7 +252,7 @@
     			<p>Defense: 99</p>
   
     		</div>
-			<input type="checkbox" name="card" value="coolwind" value="Choose Card"></td>
+			<input type="checkbox" name="card" value="Coolwind" value="Choose Card"></td>
 			
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Splashfist.jpeg" onclick="showCardStats('splashfist-stats',this)">
@@ -262,7 +262,7 @@
     			<p>Defense: 97</p>
     		
     		</div>
-    		<input  type="checkbox" name="card" value="splashfist" value="Choose Card"></td>
+    		<input  type="checkbox" name="card" value="Splashfist" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Searvoid.jpeg" onclick="showCardStats('searvoid-stats',this)">
 			<div id="searvoid-stats" style="display: none;" onclick="hideCardStats('searvoid-stats', this)">
@@ -271,7 +271,7 @@
     			<p>Defense: 88</p>
     
     		</div>
-    		<input  type="checkbox" name="card" value="searvoid" value="Choose Card"></td>
+    		<input  type="checkbox" name="card" value="Searvoid" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Braveface.jpeg" onclick="showCardStats('braveface-stats',this)">
 			<div id="braveface-stats" style="display: none;" onclick="hideCardStats('braveface-stats', this)">
@@ -280,7 +280,7 @@
     			<p>Defense: 84</p>
 
     		</div>
-    		<input type="checkbox" name="card" value="braveface" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Braveface" value="Choose Card"></td>
 			
 			<td><img class ="card" src="<%=request.getContextPath()%>/Images/Poseidon.jpeg" onclick="showCardStats('poseidon-stats',this)">
 			<div id="poseidon-stats" style="display: none;" onclick="hideCardStats('poseidon-stats', this)">
@@ -289,7 +289,7 @@
     			<p>Defense: 90</p>
     
     		</div>
-    		<input type="checkbox" name="card" value="poseidon" value="Choose Card"></td>
+    		<input type="checkbox" name="card" value="Poseidon" value="Choose Card"></td>
 			</tr>
 				
 				

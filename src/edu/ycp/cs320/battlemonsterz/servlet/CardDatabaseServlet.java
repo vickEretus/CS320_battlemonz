@@ -111,23 +111,23 @@ public class CardDatabaseServlet extends HttpServlet {
 	private List<String> getCardNames() {
 	    // create a list of card names
 	    List<String> cardNames = new ArrayList<>();
-	    cardNames.add("vader");
-	    cardNames.add("vixon");
-	    cardNames.add("smokedux");
-	    cardNames.add("zeus");
-	    cardNames.add("heathen");
+	    cardNames.add("Vader");
+	    cardNames.add("Vixon");
+	    cardNames.add("Smokedux");
+	    cardNames.add("Zeus");
+	    cardNames.add("Heathen");
 	    
-	    cardNames.add("trance");
-	    cardNames.add("nethertalon");
-	    cardNames.add("firebreather");
-	    cardNames.add("glowzee");
-	    cardNames.add("brightsoul");
+	    cardNames.add("Trance");
+	    cardNames.add("Nethertalon");
+	    cardNames.add("Firebreather");
+	    cardNames.add("Glowzee");
+	    cardNames.add("Brightsoul");
 	    
-	    cardNames.add("coolwind");
-	    cardNames.add("splashfist");
-	    cardNames.add("searvoid");
-	    cardNames.add("braveface");
-	    cardNames.add("poseidon");
+	    cardNames.add("Coolwind");
+	    cardNames.add("Splashfist");
+	    cardNames.add("Searvoid");
+	    cardNames.add("Braveface");
+	    cardNames.add("Poseidon");
 	    // add more card names as needed
 	    return cardNames;
 	}
