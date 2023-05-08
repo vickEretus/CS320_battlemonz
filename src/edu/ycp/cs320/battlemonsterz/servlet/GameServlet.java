@@ -77,7 +77,7 @@ public class GameServlet extends HttpServlet {
 		deck_one.addCard(d1_card_three);
 		
 		
-		deck_one = selectcontroller.getRandomCards();
+		//deck_one = selectcontroller.getRandomCards();
 		deck_two = selectcontroller.getRandomCards();
 	
 		
